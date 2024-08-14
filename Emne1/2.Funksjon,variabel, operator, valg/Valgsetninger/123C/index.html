@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>        
+    div.trafficLight {
+        width: 3rem;
+        height: 10rem;
+        display: flex;
+        flex-direction: column;
+        background-color: black;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    div.light {
+        background-color: red;
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+    }</style>
+</head>
+<body>
+    
+    <div id="trafficLightt" style="display:flex; flex-direction: row;">
+        <div class="trafficLight">
+            <div class="light" id="light1" style="background-color: gray;"></div>
+            <div class="light" id="light2" style="background-color: gray;"></div>
+            <div class="light" id="light3" style="background-color: gray;"></div>
+        </div>
+
+        <button style="font-size: 50px; margin-left: 50px;" onclick="goToNextPhase()">Neste</button>
+    </div>
+
+    <script>
+
+        window.onload = goToNextPhase;
+
+        let phase = 0;
+
+        function goToNextPhase(){
+            let phaseValue = phase++;
+
+            if(phaseValue == 0){
+                drawTrafficLight(true, false, false)
+            }
+            else if(phaseValue == 1){
+                drawTrafficLight(true, true, false)
+            }
+            else if(phaseValue == 2){
+                drawTrafficLight(false, false, true)
+            }
+            else if(phaseValue == 3){
+                drawTrafficLight(false, true, false)
+                phaseValue = 0;
+                phase = 0;
+            }
+
+        }
+
+        function drawTrafficLight(redOn, yellowOn, greenOn){
+
+            if(redOn == true){
+                document.getElementById("light1").style.backgroundColor = "red";
+            }
+            else{
+                document.getElementById("light1").style.backgroundColor = "gray";
+            }
+            if(yellowOn == true){
+                document.getElementById("light2").style.backgroundColor = "yellow";
+            }
+            else{
+                document.getElementById("light2").style.backgroundColor = "gray";
+            }
+            if(greenOn == true){
+                document.getElementById("light3").style.backgroundColor = "green";
+            }
+            else{
+                document.getElementById("light3").style.backgroundColor = "gray";
+            }
+        }
+
+
+    </script>
+
+
+</body>
+</html>

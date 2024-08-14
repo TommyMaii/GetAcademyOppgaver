@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<button onclick="addCircleFromInput()">Legg til sirkel</button>
+<button onclick="addRectangleFromInput()">Legg til rektangel</button>
+<input id="numberInputX" type="number" value="10">
+<input id="numberInputY" type="number" value="10">
+<select name="bcolors" id="bcolors">
+  <option value="Red">Red</option>
+  <option value="Green">Green</option>
+  <option value="Yellow">Yellow</option>
+  <option value="Blue">Blue</option>
+</select>
+
+<select name="fcolors" id="fcolors">
+  <option value="Green">Green</option>
+  <option value="Red">Red</option>
+  <option value="Yellow">Yellow</option>
+  <option value="Blue">Blue</option>
+</select>
+
+
+<!-- <button onclick="addCircle(70)">Legg til sirkel</button> -->
+<br/>
+<svg 
+  id="mySvg"
+  width="800" 
+  height="600" 
+  style="background-color:lightgray;">
+</svg>
+<script>
+
+  function addCircleFromInput () {
+    const numberInputX = document.getElementById("numberInputX");
+    let numberX = numberInputX.value;
+
+    const numberInputY = document.getElementById("numberInputY");
+    let numberY = numberInputY.value;
+
+    // const backgroundColorInput = document.getElementById("backgroundColorInp");
+    // let backgroundColorFill = backgroundColorInput.value;
+
+    let fcolor = document.getElementById("bcolors").value;
+    let bcolor = document.getElementById("fcolors").value;
+
+
+    addCircle(numberX, numberY, fcolor, bcolor);
+  }
+
+  function addRectangleFromInput () {
+    const numberInputX = document.getElementById("numberInputX");
+    let numberX = numberInputX.value;
+
+    const numberInputY = document.getElementById("numberInputY");
+    let numberY = numberInputY.value;
+
+    // const backgroundColorInput = document.getElementById("backgroundColorInp");
+    // let backgroundColorFill = backgroundColorInput.value;
+
+    let fcolor = document.getElementById("bcolors").value;
+    let bcolor = document.getElementById("fcolors").value;
+
+
+    addRectangle(numberX, numberY, fcolor, bcolor);
+  }
+
+  function addCircle(x, y, fcolor, bcolor) {
+      document.getElementById('mySvg').innerHTML = /*HTML*/`
+          <circle cx=${x} cy=${y} r="40" stroke=${bcolor} stroke-width="4" fill=${fcolor} />          
+      `;
+  }
+  function addRectangle(x, y, fcolor, bcolor) {
+      document.getElementById('mySvg').innerHTML = /*HTML*/`
+          <rect width="100" height="50" x=${x} y=${y} stroke=${bcolor} stroke-width="4" fill=${fcolor} />          
+      `;
+  }
+</script>
+
+</body>
+</html>

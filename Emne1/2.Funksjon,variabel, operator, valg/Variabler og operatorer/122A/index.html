@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #board {
+            display: grid;
+            grid-template-columns: repeat(8, 150px);
+            grid-template-rows: repeat(8, 150px);
+        }
+
+        #board>div {
+            border: 1px solid lightblue;
+        }
+
+    .selected {
+            background-color: yellow;
+        }
+    
+    </style>
+</head>
+<body>
+
+    <button onclick="moveUp()" style="width:100px; height:100px">Up</button>
+    <button onclick="moveDown()" style="width:100px; height:100px">Down</button>
+    <button onclick="moveRight()" style="width:100px; height:100px">Right</button>
+
+    <div id="board">
+    </div>
+
+    <script>
+        
+
+        let selectedSquareIndex = 7;
+        const size = 64;
+
+        showBoardWParams(7,64,7);
+
+        function showBoard() {
+            // del 1: alle rutene som ikke er valgt før den valgte
+            const lengthPart1 = selectedSquareIndex;
+            const pattern = '<div></div>';
+            const part1 = ''.padEnd(pattern.length * lengthPart1, pattern)
+            document.getElementById('board').innerHTML = part1;
+
+            // del 2: den valgte ruten
+            const part2 = '<div class="selected"></div>';
+            document.getElementById('board').innerHTML += part2;
+
+            // del 3  alle rutene som ikke er valgt etter den valgte
+            const lengthPart3 = size - (selectedSquareIndex + 1);
+            const part3 = ''.padEnd(pattern.length * lengthPart3, pattern)
+            document.getElementById('board').innerHTML += part3;
+        }
+
+        function showBoardWParams(widthRows, HeightRows, sizeBoard) {
+            // del 1: alle rutene som ikke er valgt før den valgte
+            const pattern = '<div></div>';
+            const part1 = ''.padEnd(pattern.length * widthRows, pattern)
+            document.getElementById('board').innerHTML = part1;
+
+            // del 2: den valgte ruten
+            const part2 = '<div class="selected"></div>';
+            document.getElementById('board').innerHTML += part2;
+
+            // del 3  alle rutene som ikke er valgt etter den valgte
+            const lengthPart3 = sizeBoard - (HeightRows + 1);
+            const part3 = ''.padEnd(pattern.length * HeightRows, pattern)
+            document.getElementById('board').innerHTML += part3;
+        }
+
+    
+
+function moveDown(){
+    selectedSquareIndex+=8;
+
+            const pattern = '<div></div>';
+            const part1 = ''.padEnd(pattern.length * selectedSquareIndex, pattern)
+            document.getElementById('board').innerHTML = part1;
+
+            // del 2: den valgte ruten
+            const part2 = '<div class="selected"></div>';
+            document.getElementById('board').innerHTML += part2;
+
+            // del 3  alle rutene som ikke er valgt etter den valgte
+            const lengthPart3 = size - (selectedSquareIndex + 1);
+            const part3 = ''.padEnd(pattern.length * lengthPart3, pattern)
+            document.getElementById('board').innerHTML += part3;
+
+}
+function moveUp(){
+    selectedSquareIndex-=8;
+            const pattern = '<div></div>';
+            const part1 = ''.padEnd(pattern.length * selectedSquareIndex, pattern)
+            document.getElementById('board').innerHTML = part1;
+
+            // del 2: den valgte ruten
+            const part2 = '<div class="selected"></div>';
+            document.getElementById('board').innerHTML += part2;
+
+            // del 3  alle rutene som ikke er valgt etter den valgte
+            const lengthPart3 = size - (selectedSquareIndex + 1);
+            const part3 = ''.padEnd(pattern.length * lengthPart3, pattern)
+            document.getElementById('board').innerHTML += part3;
+}
+function moveRight(){
+    selectedSquareIndex+=1;
+    const pattern = '<div></div>';
+            const part1 = ''.padEnd(pattern.length * selectedSquareIndex, pattern)
+            document.getElementById('board').innerHTML = part1;
+
+            // del 2: den valgte ruten
+            const part2 = '<div class="selected"></div>';
+            document.getElementById('board').innerHTML += part2;
+
+            // del 3  alle rutene som ikke er valgt etter den valgte
+            const lengthPart3 = size - (selectedSquareIndex + 1);
+            const part3 = ''.padEnd(pattern.length * lengthPart3, pattern)
+            document.getElementById('board').innerHTML += part3;
+}
+
+    </script>
+    
+</body>
+</html>

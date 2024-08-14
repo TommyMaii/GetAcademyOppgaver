@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="padding:0px;margin:0px;">
+    
+    <div id="hus">
+    <h1 style="position: absolute; left:50%; top:50%;">Du er utenfor leiligheten din</h1>
+    <button style="position: absolute; left:50%; top:60%; height:50px; width:150px;" onclick="gåTilGangen()">Trykk for å åpne døren</button>
+    <img style="width:100vw; height:99.6vh;" src="https://www.shutterstock.com/image-photo/door-way-digital-locking-on-600nw-2260164141.jpg"/>
+    </div>
+
+
+
+    <script>
+
+        function gåTilGangen(){
+            document.getElementById("hus").innerHTML = /*HTML*/ `
+            <h1 style="position: absolute; left:35%; color:red; font-size:100px">Du er i gangen</h1>
+            <button style="position: absolute; left:47.5%; top:80%; height:50px; width:150px;" onclick="getMeOutOfHere()">Woops feil hus</button>
+            <img style="width:100vw; height:99.6vh;" src="https://images.bonnier.cloud/files/bob/production/2023/03/29094004/Michael-Schmidt_022.jpeg"/>
+            `
+        }
+        
+        function getMeOutOfHere(){
+            document.getElementById("hus").innerHTML = /*HTML*/ `
+            <h1 style="position: absolute; left:50%; top:50%;">Du er utenfor leiligheten din</h1>
+            <button style="position: absolute; left:50%; top:60%; height:50px; width:150px;" onclick="notAgain()">Håper denne døra er riktig!</button>
+            <img style="width:100vw; height:99.6vh;" src="https://www.shutterstock.com/image-photo/door-way-digital-locking-on-600nw-2260164141.jpg"/>
+            `
+        }
+
+        function notAgain(){
+            document.getElementById("hus").innerHTML = /*HTML*/ `
+            <h1 style="position: absolute; left:35%; top:10%; color:red; font-size:100px">Du er i gangen</h1>
+            <button style="position: absolute; left:47.5%; top:80%; height:50px; width:150px;" onclick="riktigHus()">Igjen!?!</button>
+            <img style="width:100vw; height:99.6vh;" src="https://images.bonnier.cloud/files/bob/production/2023/03/29094004/Michael-Schmidt_022.jpeg"/>
+            `
+        } 
+
+        function riktigHus(){
+            document.getElementById("hus").innerHTML = /*HTML*/ `
+            <h1 style="position: absolute; left:50%; top:50%;">Du er utenfor leiligheten din</h1>
+            <button style="position: absolute; left:50%; top:60%; height:50px; width:150px;" onclick="vanligGang()">Riktig hus, yes!</button>
+            <img style="width:100vw; height:99.6vh;" src="https://www.shutterstock.com/image-photo/door-way-digital-locking-on-600nw-2260164141.jpg"/>
+            `
+        }
+
+        function vanligGang() {
+            document.getElementById("hus").innerHTML = /*HTML*/ `
+            <h1 style="position: absolute; left:35%; color:red; font-size:100px">Du er i gangen</h1>
+            <button style="position: absolute; left:47.5%; top:80%; height:50px; width:150px;" onclick="riktigHus2()">Phew, Riktig hus</button>
+
+            <button style="position: absolute; left:46.65%; top:20%; height:50px; width:150px;" onclick="gåTilStue()">Gå til stue</button>
+            <button style="position: absolute; left:10%; top:50%; height:50px; width:150px;" onclick="gåTilKjokken()">Gå til kjøkken</button>
+            <button style="position: absolute; left:85%; top:50%; height:50px; width:150px;" onclick="gåTilBad()">Gå til bad</button>
+            <img style="width:100vw; height:99.6vh;" src="https://images.bonnier.cloud/files/bob/production/2023/03/29094004/Michael-Schmidt_022.jpeg"/>
+            `
+        }
+
+        function riktigHus2() {
+            document.getElementById("hus").innerHTML = /*HTML*/ `
+            <h1 style="position: absolute; left:50%; top:50%;">Du er utenfor leiligheten din</h1>
+            <button style="position: absolute; left:50%; top:60%; height:50px; width:150px;" onclick="vanligGang()">Gå inn</button>
+            <img style="width:100vw; height:99.6vh;" src="https://www.shutterstock.com/image-photo/door-way-digital-locking-on-600nw-2260164141.jpg"/>
+            `
+        }
+
+
+        function gåTilStue(){
+            document.getElementById("hus").innerHTML = /*HTML*/ `
+            <h1 style="position: absolute; left:35%; color:red; font-size:100px">Du er i stuen</h1>
+            <button style="position: absolute; left:46%; top:90%; height:50px; width:150px;" onclick="vanligGang()">Gå tilbake</button>
+            <button style="position: absolute; left:10%; top:40%; height:50px; width:150px;" onclick="gåTilKjokken()">Gå til kjøkken</button>
+            <img style="width:100vw; height:99.6vh;" src="https://boligpartner-cdn.imgix.net/uploads/YKxTzRcve66AGYU2m4JH4I93oejbL0tj2nM3nspT.jpg?w=770&h=auto&auto=format"/>
+            `
+        }
+
+        function gåTilKjokken(){
+            document.getElementById("hus").innerHTML = /*HTML*/ `
+            <h1 style="position: absolute; left:35%; color:red; font-size:100px">Du er i kjøkkenet</h1>
+            <button style="position: absolute; left:46%; top:90%; height:50px; width:150px;" onclick="vanligGang()">Gå tilbake</button>
+            <button style="position: absolute; left:90%; top:40%; height:50px; width:150px;" onclick="gåTilStue()">Gå til stuen</button>
+            <img style="width:100vw; height:99.6vh;" src="https://files-cdn.vitaminw.no/bb741e4824f94706a4f3aafb6e56570f/Root/Inspirasjon/2_kj%C3%B8kken_72ppi_RGB.jpg/2_kj%C3%B8kken_72ppi_RGB-fullskjerm-desktop.jpg?ts=637140796247396465g"/>
+            `
+        }
+
+        function gåTilBad(){
+            document.getElementById("hus").innerHTML = /*HTML*/ `
+            <h1 style="position: absolute; left:35%; color:red; font-size:100px">Du er på badet</h1>
+            <button style="position: absolute; left:46%; top:90%; height:50px; width:150px;" onclick="vanligGang()">Gå tilbake</button>
+            <img style="width:100vw; height:99.6vh;" src="https://cdn.prod.website-files.com/5c8f85a650ed9d042570a882/5cbf59600b19eec71b9b1eae_Bygge%20bad.jpg"/>
+            `
+        }
+   
+   </script>
+
+
+</body>
+</html>

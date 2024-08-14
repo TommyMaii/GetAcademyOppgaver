@@ -1,0 +1,75 @@
+<html>
+<head>
+    <style>
+        div.trafficLight {
+            width: 3rem;
+            height: 10rem;
+            display: flex;
+            flex-direction: column;
+            background-color: black;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        div.light {
+            background-color: red;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="trafficLightt">
+        <div class="trafficLight" onclick="redAndYellow()">
+            <div class="light" style="background-color: red;"></div>
+            <div class="light" style="background-color: gray;"></div>
+            <div class="light" style="background-color: gray;"></div>
+        </div>
+    </div>
+
+
+    <script>
+
+        
+        function redAndYellow () {
+            document.getElementById("trafficLightt").innerHTML = /*HTML*/ `
+            <div class="trafficLight" onclick="green()">
+                <div class="light" style="background-color: red;"></div>
+                <div class="light" style="background-color: yellow;"></div>
+                <div class="light" style="background-color: gray;"></div>
+            </div>
+            `
+        }
+        function green () {
+            document.getElementById("trafficLightt").innerHTML = /*HTML*/ `
+            <div class="trafficLight" onclick="yellow()">
+                <div class="light" style="background-color: gray;"></div>
+                <div class="light" style="background-color: gray;"></div>
+                <div class="light" style="background-color: green;"></div>
+            </div>
+            `
+        }
+        function yellow () {
+            document.getElementById("trafficLightt").innerHTML = /*HTML*/ `
+            <div class="trafficLight" onclick="red()">
+                <div class="light" style="background-color: gray;"></div>
+                <div class="light" style="background-color: yellow;"></div>
+                <div class="light" style="background-color: gray;"></div>
+            </div>
+            `
+        }
+        function red () {
+            document.getElementById("trafficLightt").innerHTML = /*HTML*/ `
+            <div class="trafficLight" onclick="redAndYellow()">
+                <div class="light" style="background-color: red;"></div>
+                <div class="light" style="background-color: gray;"></div>
+                <div class="light" style="background-color: gray;"></div>
+            </div>
+            `
+        }
+
+    </script>
+</body>
+</html>

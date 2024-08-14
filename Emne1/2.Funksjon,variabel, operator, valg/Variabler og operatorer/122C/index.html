@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+<body> 
+
+    <button onclick="BliStørre()">Større Tekst</button>
+    <button onclick="BliMindre()">Mindre Tekst</button>
+    <button onclick="BliStørreRød()">Større Rød</button>
+    <button onclick="BliMindreRød()">Mindre Rød</button>
+    <button onclick="BliStørreBlå()">Større Blå</button>
+    <button onclick="BliMindreBlå()">Mindre Blå</button>
+    <button onclick="BliStørreGrønn()">Større Grønn</button>
+    <button onclick="BliMindreGrønn()">Mindre Grønn</button>
+
+    <div id="red">Red Default</div>
+    <div id="blue">Blue default</div>
+    <div id="green">Green Default</div>
+    <div id="divs">Getacademy size default</div>
+
+
+    <label>BYTT SKRIFT HER</label>
+    <select onchange="changeFontFamily()" id="fonts">
+        <option>Arial</option>
+        <option>Verdana</option>
+        <option>Tahoma</option>
+        <option>Trebuchet MS</option>
+        <option>Times New Roman</option>
+        <option>Georgia</option>
+        <option>Garamond</option>
+        <option>Courier New</option>
+        <option>Brush Script MT</option>
+    </select>
+
+    <script>
+
+        let currentFontSize = 50;
+        let redValue = 125;
+        let greenValue = 125;
+        let blueValue = 125;
+
+
+        window.onload = function setDefaultFontSize(){
+            document.getElementById("divs").style.fontSize = currentFontSize+"px"; 
+        };
+
+        function changeFontFamily(){
+            document.getElementById("divs").style.fontFamily = document.getElementById("fonts").value;
+        }
+
+        function BliStørre(){
+            let biggersize = currentFontSize + 10;
+            currentFontSize+=10;
+            document.getElementById("divs").style.fontSize = biggersize+"px";
+            document.getElementById("divs").innerHTML = 
+            `
+            <p>Getacademy size ${biggersize.toString()}</p>
+            `
+        }
+        function BliMindre(){
+            let smallerSize = currentFontSize - 10;
+            currentFontSize-=10;
+            document.getElementById("divs").style.fontSize = smallerSize+"px";
+            document.getElementById("divs").innerHTML = 
+            `
+            <p>Getacademy size ${smallerSize.toString()}</p>
+            ` 
+        }
+        function BliStørreRød(){
+            let bigger = redValue + 10;
+            redValue+=10;
+            document.getElementById("red").innerHTML = 
+            `
+            <p>RedValue ${bigger.toString()}</p>
+            `
+            document.getElementById('divs').style.backgroundColor = `rgb(${redValue},${greenValue},${blueValue})`;
+
+        }
+        function BliMindreRød(){
+            let smaller = redValue - 10;
+            redValue-=10;
+            document.getElementById("red").innerHTML = 
+            `
+            <p>RedValue ${smaller.toString()}</p>
+            `
+            document.getElementById('divs').style.backgroundColor = `rgb(${redValue},${greenValue},${blueValue})`;
+
+        }
+        function BliStørreBlå(){
+            let bigger = blueValue + 10;
+            blueValue+=10;
+            document.getElementById("blue").innerHTML = 
+            `
+            <p>BlueValue ${bigger.toString()}</p>
+            `
+            document.getElementById('divs').style.backgroundColor = `rgb(${redValue},${greenValue},${blueValue})`;
+
+        }
+        function BliMindreBlå(){
+            let smaller = blueValue - 10;
+            blueValue-=10;
+            document.getElementById("blue").innerHTML = 
+            `
+            <p>BlueValue ${smaller.toString()}</p>
+            `
+            document.getElementById('divs').style.backgroundColor = `rgb(${redValue},${greenValue},${blueValue})`;
+
+        }
+        function BliStørreGrønn(){
+            let bigger = greenValue + 10;
+            greenValue+=10;
+            document.getElementById("green").innerHTML = 
+            `
+            <p>GreenValue ${bigger.toString()}</p>
+            `
+            document.getElementById('divs').style.backgroundColor = `rgb(${redValue},${greenValue},${blueValue})`;
+
+        }
+        function BliMindreGrønn(){
+            let smaller = greenValue - 10;
+            greenValue-=10;
+            document.getElementById("green").innerHTML = 
+            `
+            <p>GreenValue ${smaller.toString()}</p>
+            `
+            document.getElementById('divs').style.backgroundColor = `rgb(${redValue},${greenValue},${blueValue})`;
+
+        }
+
+    </script>
+    
+</body>
+</html>

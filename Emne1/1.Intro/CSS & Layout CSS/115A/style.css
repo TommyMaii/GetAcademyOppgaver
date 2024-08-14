@@ -1,0 +1,29 @@
+body{
+    padding:0;
+    margin:0;
+}
+div.page{
+    height: 100vh;
+    display:grid;
+    grid-template-columns: 1fr 10fr;
+    grid-template-rows: 1fr 10fr 1fr;
+    grid-template-areas: 
+    'header header'
+    'sideBar mainContent'
+    'footer footer';
+}
+div.header{
+    grid-area:header;
+}
+div.sideBar{
+    grid-area:sideBar;
+
+}
+div.mainContent{
+    grid-area:mainContent;
+
+}
+div.footer{
+    grid-area:footer;
+
+}
