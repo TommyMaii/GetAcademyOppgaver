@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <button style="width:200px; height:100px;" onclick="increaseNumber()">Få mere poeng</button>
+        <button style="width:200px; height:100px;" onclick="buyPower()">Bonus Power</button>
+        <div id="number"></div>
+    </div>
+
+    <script>
+
+        let number = 0;
+        let powerCount = 0;
+        
+        window.onload = function defaultView(){
+            document.getElementById("number").innerHTML = 
+            `
+            <h3>${number}</h3>
+            `
+        };
+        
+        function increaseNumber(){
+
+            if(powerCount > 0){
+                number = number + powerCount;
+            }
+
+            document.getElementById("number").innerHTML = 
+            `
+            <h3>${number+=1}</h3>
+            `
+        }
+        
+        function buyPower(){
+
+        if(number <= 9){
+            alert("Please dont do zat")
+        }
+        else{
+        
+            document.getElementById("number").innerHTML = 
+            `
+            <h3>${number-=10}</h3>
+            ` 
+
+        powerCount+=1
+        }
+
+
+        }
+    </script>
+    
+</body>
+</html>

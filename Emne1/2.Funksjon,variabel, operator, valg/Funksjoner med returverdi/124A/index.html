@@ -1,115 +1,45 @@
 <!DOCTYPE html>
-<html lang="no">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strekmann</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        .strekmann {
-            width: 200px;
-            height: 300px;
-        }
-    </style>
+    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 </head>
 <body>
 
     <div id="app">
-    <button style="height: 100ox; width: 100px;" onclick="venstreArmOpp()">
-        Venstre arm
-    </button>
 
-    <button onclick="" style="height: 100ox; width: 100px;">
-        Høyre arm
-    </button>
-    
-<svg class="strekmann" viewBox="0 0 200 300" id="idStrekmann">
-    <!-- Hodet -->
-    <circle cx="100" cy="50" r="30" stroke="black" stroke-width="3" fill="none" />        
-    <!-- Kroppen -->
-    <line x1="100" y1="80" x2="100" y2="200" stroke="black" stroke-width="3" />        
-    <!-- Venstre arm -->
-    <line x1="100" y1="120" x2="50" y2="90" stroke="black" stroke-width="3" />        
-    <!-- Høyre arm -->
-    <line x1="100" y1="120" x2="150" y2="150" stroke="black" stroke-width="3"  />        
-    <!-- Venstre ben -->
-    <line x1="100" y1="200" x2="50" y2="270" stroke="black" stroke-width="3" />        
-    <!-- Høyre ben -->
-    <line x1="100" y1="200" x2="150" y2="270" stroke="black" stroke-width="3" />
-
-
-</svg>
-
-</div>
+    </div>
 
     <script>
 
-        function venstreArmOpp(){
+        showGoodsInCart();
 
+
+        function showGoodsInCart(){
+
+            
             document.getElementById("app").innerHTML = /*HTML*/
             `
-                <button style="height: 100ox; width: 100px;" onclick="venstreArmNed()">
-                    Venstre arm
-                </button>
-
-                <button onclick="" style="height: 100px; width: 100px;">
-                    Høyre arm
-                </button>
-                
-                <svg class="strekmann" viewBox="0 0 200 300" id="idStrekmann">
-                    <!-- Hodet -->
-                    <circle cx="100" cy="50" r="30" stroke="black" stroke-width="3" fill="none" />        
-                    <!-- Kroppen -->
-                    <line x1="100" y1="80" x2="100" y2="200" stroke="black" stroke-width="3" />        
-                    <!-- Venstre arm -->
-                    <line x1="100" y1="120" x2="50" y2="90" stroke="black" stroke-width="3" />        
-                    <!-- Høyre arm -->
-                    <line x1="100" y1="120" x2="150" y2="150" stroke="black" stroke-width="3"  />        
-                    <!-- Venstre ben -->
-                    <line x1="100" y1="200" x2="50" y2="270" stroke="black" stroke-width="3" />        
-                    <!-- Høyre ben -->
-                    <line x1="100" y1="200" x2="150" y2="270" stroke="black" stroke-width="3" />
-
-                </svg>
+            <div style="display: flex; flex-direction: row; align-items: center;">
+            <h3>Handlevogn</h3>
+            <i class="material-icons" style="font-size:36px; color:black">shopping_cart</i>
+            </div>
+            <h3>
+            ${addGoods("Tastatur", 129, 3)}
+            </h3>
             `
+
         }
 
-        function venstreArmNed(){
+        function addGoods(name, price, count){
+            return `${count}stk. ${name} a ${price}kr = ${count*price}kr`
 
-            document.getElementById("app").innerHTML = /*HTML*/
-            `
-                <button style="height: 100ox; width: 100px;" onclick="venstreArmOpp()">
-                    Venstre arm
-                </button>
-
-                <button onclick="" style="height: 100ox; width: 100px;">
-                    Høyre arm
-                </button>
-                
-                <svg class="strekmann" viewBox="0 0 200 300" id="idStrekmann">
-                    <!-- Hodet -->
-                    <circle cx="100" cy="50" r="30" stroke="black" stroke-width="3" fill="none" />        
-                    <!-- Kroppen -->
-                    <line x1="100" y1="80" x2="100" y2="200" stroke="black" stroke-width="3" />        
-                    <!-- Venstre arm -->
-                    <line x1="100" y1="120" x2="50" y2="150" stroke="black" stroke-width="3" />        
-                    <!-- Høyre arm -->
-                    <line x1="100" y1="120" x2="150" y2="150" stroke="black" stroke-width="3"  />        
-                    <!-- Venstre ben -->
-                    <line x1="100" y1="200" x2="50" y2="270" stroke="black" stroke-width="3" />        
-                    <!-- Høyre ben -->
-                    <line x1="100" y1="200" x2="150" y2="270" stroke="black" stroke-width="3" />
-                </svg>
-            `
         }
 
     </script>
+    
 </body>
 </html>

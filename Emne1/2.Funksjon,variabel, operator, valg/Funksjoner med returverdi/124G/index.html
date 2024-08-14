@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+
+    </div>
+
+    
+    <script>
+
+        showDateSelector();
+
+
+
+
+        function showDateSelector() {
+            document.getElementById('app').innerHTML =
+                createNumberSelector(13, 1, 31, 'Day')
+                + createNumberSelector(8, 1, 12, 'Month')
+                + createNumberSelector(2023, 2020, 2025, 'Year');
+                console.log(document.getElementById('DayMain').value)
+        }
+
+        function createNumberSelector(shownNumber, minNum, maxNum, type){
+            if(shownNumber == maxNum){
+                return document.getElementById("app").innerHTML = /*HTML*/
+                `
+                <div>
+                <div id="${type}Main" style="display: flex;align-items: center;">
+                <div id="${type}" style="font-size: 300%;">${shownNumber}</div>
+                <div style="display: flex; flex-direction: column;align-items: flex-start;">
+                    <button onclick="select${type}(${shownNumber+1})" disabled>▲</button>
+                    <button onclick="select${type}(${shownNumber-1})">▼</button>
+                </div>
+                </div>
+                `
+            }
+            if(shownNumber == minNum){
+                return document.getElementById("app").innerHTML = /*HTML*/
+                `
+                <div>
+                <div id="${type}Main" style="display: flex;align-items: center;">
+                <div id="${type}" style="font-size: 300%;">${shownNumber}</div>
+                <div style="display: flex; flex-direction: column;align-items: flex-start;">
+                    <button onclick="select${type}(${shownNumber+1})">▲</button>
+                    <button onclick="select${type}(${shownNumber-1})" disabled>▼</button>
+                </div>
+                </div>
+                `
+            }
+            else{
+                return document.getElementById("app").innerHTML = /*HTML*/
+                `
+                <div id="${type}Main" style="display: flex;align-items: center;">
+                <div id="${type}" style="font-size: 300%;">${shownNumber}
+                    </div>
+                <div style="display: flex; flex-direction: column;align-items: flex-start;">
+                    <button onclick="select${type}(${shownNumber+1})">▲</button>
+                    <button onclick="select${type}(${shownNumber-1})">▼</button>
+                </div>
+
+                `
+            }
+        }
+        
+        function selectDay(day){
+            document.getElementById('DayMain').innerHTML =
+                    createNumberSelector(day, 1, 31, 'Day');
+        }
+        
+        function selectMonth(month){
+            document.getElementById('MonthMain').outerHTML =
+                createNumberSelector(month, 1, 12, 'Month');
+        }
+
+        function selectYear(year){
+            document.getElementById('YearMain').outerHTML =
+                createNumberSelector(year, 2000, 2025, 'Year');
+        }
+
+        function getDate(){
+
+        let valueDay = document.getElementById('DayMain').value;
+        let valueMonth = document.getElementById('MonthMain').value;
+        let valueYear = document.getElementById('YearMain').value;
+
+        return document.getElementById("app").innerHTML += /*HTML*/
+        `
+        <h3>${valueDay}.${valueMonth}.${valueYear}</h3>
+        `
+
+        }
+
+
+        
+
+    </script>
+
+</body>
+</html>

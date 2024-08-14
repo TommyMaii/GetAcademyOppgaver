@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <div id="app" style="flex-direction: row; display: flex; align-items: center;">
+        
+        <input type="number" id="number" placeholder="25">
+        <button style="width:100px; height:20px;" onclick="guessNumber()">Gjett Nummer</button>
+        <div id="guess"></div>
+
+    </div>
+
+
+    <script>
+
+
+        let secretNumber = getRandomNumber(1,100);
+        let guesses = 0;
+
+        function getRandomNumber(min, max) {
+        return min + Math.floor(Math.random() * (max - min + 1));
+        }
+
+        function guessNumber(){
+
+            let guessedNumber = document.getElementById("number").value;
+            incrementGuessingNumber()
+            if(guessedNumber == secretNumber){
+                alert("Du vant!");
+                window.location.reload();
+            }
+            else if(guessedNumber > secretNumber){
+                alert("Gjett et lavere nummer")
+            }
+            else if(guessedNumber < secretNumber){
+                alert("Gjett et høyere nummer")
+            }
+        }
+
+        function incrementGuessingNumber(){
+            guesses+=1 
+            document.getElementById("guess").innerHTML = 
+            `
+            <h1>Du har gjettet ${guesses} ganger</h1>
+            `
+
+        }
+
+
+    </script>
+    
+</body>
+</html>

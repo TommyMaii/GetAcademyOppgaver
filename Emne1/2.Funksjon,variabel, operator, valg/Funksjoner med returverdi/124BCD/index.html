@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <div id="app">
+
+
+    </div>
+
+
+    <script>
+
+        showTemp("Fahrenheit", 100);
+        showTemp("Celsius", 212);
+
+        function showTemp(typeOfTemp , temp){
+            document.getElementById("app").innerHTML += /*HTML*/
+            `
+           <h3>${temp} ${typeOfTemp} er
+            ${calculateTemp(typeOfTemp, temp)} 
+            ${temperatureText(typeOfTemp)} 😰</h3>
+    
+            `
+        }
+
+        function calculateTemp(typeOfTemp, temp){
+            if(typeOfTemp == "Fahrenheit"){
+            return temp * (9/5) + 32;
+            }
+            else{
+            return (temp - 32) * (5/9);
+            }   
+        }
+
+        function temperatureText(typeOfTemp){
+            if(typeOfTemp == "Fahrenheit"){
+                return "Celsius"
+            }
+            else{
+                return "Fahrenheits"
+            }
+        }
+
+
+
+    </script>
+    
+</body>
+</html>
