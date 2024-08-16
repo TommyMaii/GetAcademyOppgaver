@@ -7,11 +7,105 @@
 </head>
 <body>
     
+    <button style="width:50px; height:50px" onclick="playStone()">Stein</button>
+    <button style="width:50px; height:50px" onclick="playScissor()">Saks</button>
+    <button style="width:50px; height:50px" onclick="playPaper()">Papir</button>
+    
+    <div>
+        <h3 id="yourPoints">Du har 0 poeng.</h3>
+        <h3 id="computerPoints">Motstander har 0 poeng.</h3>
+        
+    </div>
+
     <script>
 
-        function getRandomNumber(min, max) {
-        return 1 + Math.floor(Math.random() * (4 - 1 + 1));
+let text = "";
+let yourPoints = 0;
+let computerPoints = 0;;
+
+        function playStone(){
+            gameRules();
+            if(text == "Stein"){
+                alert("UAVGJORT, motstander valgte stein");
+            }
+            if(text == "Saks"){
+                alert("Du vant! Motstander valgte saks");
+                addPointsPlayer()
+            }
+            if(text == "Papir"){
+                alert("Du tapte! Motstander valgte papir");
+                addPointsComputer()
+            }
         }
+        function playScissor(){
+            gameRules();
+            if(text == "Stein"){
+                alert("Du tapte! motstander valgte stein");
+                addPointsComputer()
+            }
+            if(text == "Saks"){
+                alert("UAVGJORT Motstander valgte saks");
+            }
+            if(text == "Papir"){
+                alert("Du vant! Motstander valgte papir");
+                addPointsPlayer()
+            }
+        }
+        function playPaper(){
+            gameRules();
+            if(text == "Stein"){
+                alert("Du vant!, motstander valgte stein");
+                addPointsPlayer()
+            }
+            if(text == "Saks"){
+                alert("Du tapte! Motstander valgte saks");
+                addPointsComputer()
+            }
+            if(text == "Papir"){
+                alert("UAVGJORT Motstander valgte papir");
+            }
+        }
+
+        function gameRules(){
+            let number = getRandomNumber(1,4);
+            if(number == 1){
+                return text="Stein";
+            }
+            if(number == 2){
+                return text="Saks";
+            }
+            if(number == 3){
+                return text="Papir";
+            }
+        }
+
+        function addPointsPlayer(){
+            
+            yourPoints+=1;
+
+            return document.getElementById("yourPoints").innerHTML = /*HTML*/
+            `
+                <h3>Du har ${yourPoints} poeng.</h3>
+            `
+        }
+
+        
+        function addPointsComputer(){
+
+        computerPoints+=1;
+
+        return document.getElementById("computerPoints").innerHTML = /*HTML*/
+        `
+            <h3>Motstander har ${computerPoints} poeng.</h3>
+        `
+        }
+
+
+        function getRandomNumber(min, max) {
+        return min + Math.floor(Math.random() * (max - min + 1));
+        }
+
+
 
     </script>
 

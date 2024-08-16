@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #calculator > div {
+            border: 1px aqua solid;
+        }
+    </style>
+</head>
+<body>
+
+    <!--
+    Lag en enkel kalkulator med knapper for sifrene 0-9, for regneoperasjonene +, -, * og /, for = og for å nulle ut. 
+    Trykker man på et siffer, skal det legges til på "skjermen". 
+    Når man trykker på en regneoperasjon, må man huske tallet som var på skjermen, blanke ut - 
+    og så la brukeren skrive inn neste tall. Når brukeren trykke =, 
+    må man huske valgt regneoperasjon og det første tallet og regne ut sammen med tallet på skjermen. Så viser man resultatet på "skjermen".-->
+
+    <div id="app">
+    <div id="calculator" style="display:grid; grid-template-columns: repeat(3,100px);grid-template-rows: repeat(6,100px); background-color: gray; width:300px">
+        <input style="grid-column: span 2;" id="inputField" type="text" readonly>
+        <button onclick="removeInput()">Null</button>
+        <button onclick="getNumbersFromButtonToInput(1)">1</button>
+        <button onclick="getNumbersFromButtonToInput(2)">2</button>
+        <button onclick="clickedOperator()">*</button>
+        <button onclick="getNumbersFromButtonToInput(3)">3</button>
+        <button onclick="getNumbersFromButtonToInput(4)">4</button>
+        <button onclick="getNumbersFromButtonToInput('-')">-</button>
+        <button onclick="getNumbersFromButtonToInput(5)">5</button>
+        <button onclick="getNumbersFromButtonToInput(6)">6</button>
+        <button onclick="getNumbersFromButtonToInput('+')">+</button>
+        <button onclick="getNumbersFromButtonToInput(7)">7</button>
+        <button onclick="getNumbersFromButtonToInput(8)">8</button>
+        <button onclick="getNumbersFromButtonToInput('/')">/</button>
+        <button onclick="getNumbersFromButtonToInput(9)">9</button>
+        <button style="grid-column: span 2;" onclick="calculations()">=</button>
+
+        <script>
+
+            let inputtedNumbers1;
+            let inputtedNumbers2;
+
+            function calculations(){
+
+                let calculatedNumber = Number(inputtedNumbers2) * Number(getInputtedNumbers());
+            document.getElementById("inputField").value = calculatedNumber;
+                console.log(inputtedNumbers2)
+                console.log(getInputtedNumbers())
+
+            }
+
+            function clickedOperator(){
+                getInputtedNumbers();
+                inputtedNumbers2 = inputtedNumbers1;
+                removeInput();
+
+            }
+
+            function getInputtedNumbers(){
+                return inputtedNumbers1 = document.getElementById("inputField").value;
+            }
+
+            function getNumbersFromButtonToInput(number){
+                return inputtedNumbers1 = document.getElementById("inputField").value += number;
+            }
+
+            function removeInput(){
+                return inputtedNumbers1 = document.getElementById("inputField").value = "";
+            }
+
+        </script>
+
+    </div>
+    </div>
+    
+</body>
+</html>

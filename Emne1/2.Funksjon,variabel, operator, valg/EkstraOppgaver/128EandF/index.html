@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app > div {
+            border: 1px solid aqua;
+        }
+        #selected {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app" style="display: grid;
+    grid-template-columns: repeat(2, 150px);
+    grid-template-rows: repeat(2, 150px);
+    border: 1px solid aqua;
+    width:300px">
+
+    </div>
+
+    <div>
+        <h1 id="timer">Du brukte 0 sekunder</h1>
+    </div>
+
+    <script>
+
+        let time;
+
+        createBoard(getRandomNumber(0,3));
+        let e = timer()
+        
+        function createBoard(selectedIndex){
+        for(i = 0; i < selectedIndex; i++){
+            addNormalSquare()
+        }
+        addSelectedSquare();
+        for(i = selectedIndex; i < 3; i++){
+            addNormalSquare()
+        }
+        }
+
+        function getRandomNumber(min, max) {
+        return min + Math.floor(Math.random() * (max - min + 1));
+        }
+        function addSelectedSquare(){
+            return document.getElementById("app").innerHTML += '<div id="selected" onclick="correctSquare()"></div>'
+        }
+        function addNormalSquare(){
+            return document.getElementById("app").innerHTML += '<div></div>'
+        }
+        function correctSquare(){
+            let f = timer();
+            let timeDiff = (f - e)/1000;
+            document.getElementById("timer").innerHTML = `<h1 id="timer">Du brukte ${timeDiff} sekunder</h1>`
+            location.reload()
+        }
+        function timer(){
+            return new Date().getTime();
+        }
+    </script>
+    
+</body>
+</html>

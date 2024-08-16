@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #board {
+    display: grid;
+    grid-template-columns: repeat(8, 100px);
+    grid-template-rows: repeat(8, 100px);
+}
+
+.whitePiece {
+    color: white;
+    text-shadow: 1px 1px gray;
+}
+
+.blackPiece {
+    color: black;
+}
+
+.lightSquare,
+.darkSquare {
+    font-size: 450%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.lightSquare {
+    background-color: rgb(240, 217, 181);
+}
+
+.darkSquare {
+    background-color: rgb(181, 136, 99);
+}
+    </style>
+</head>
+<body>
+
+    <div id="board">
+    </div>
+
+    <script>
+        //SquareColors are the color of the board, Piececolor are the color of the pieces.
+
+        createBoard();
+
+        function createBoard(){
+
+            createPieceRows("light","dark","black");
+            createPawns("dark","light", "black");
+            createEmptyRows();
+            createPawns("light", "dark", "white");
+            createPieceRows("dark", "light", "white");
+        }
+        function createPieceRows(squareColor1, squareColor2, piececolor){
+            createPiece(squareColor1,piececolor,"♜");
+            createPiece(squareColor2,piececolor,"♞");
+            createPiece(squareColor1,piececolor,"♝");
+            createPiece(squareColor2,piececolor,"♛");
+            createPiece(squareColor1,piececolor,"♚");
+            createPiece(squareColor2,piececolor,"♝");
+            createPiece(squareColor1,piececolor,"♞");
+            createPiece(squareColor2,piececolor,"♜");
+
+        }
+        //This method makes 2 rows. 
+        //1 starting with light square.
+        //The other with dark square.
+        function createEmptyRows(){
+            let i = 0;
+            while (i < 2){
+            i++;
+            createRows("light", "dark");
+            createRows("dark", "light");
+            }
+        }
+        //This method makes 1 whole row
+        function createRows(squareColor1, squareColor2){
+            for(i = 0; i < 4; i++){
+                createPiece(squareColor1,"","");
+                createPiece(squareColor2,"","");
+            }
+        }
+        function createPawns(squareColor1, squareColor2, piececolor1){
+            for(i = 0; i < 4; i++){
+                createPiece(squareColor1,piececolor1,"♟");
+                createPiece(squareColor2,piececolor1,"♟");
+            }
+        }
+        function createPiece(squareColor, pieceColor, whichPiece){
+            document.getElementById("board").innerHTML += /*HTML*/
+            `
+            <div class="${squareColor}Square ${pieceColor}Piece">${whichPiece}</div>
+            `
+        }
+
+    </script>
+    
+</body>
+</html>
