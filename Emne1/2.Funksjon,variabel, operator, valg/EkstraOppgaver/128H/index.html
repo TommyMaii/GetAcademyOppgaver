@@ -25,38 +25,68 @@
         <button onclick="removeInput()">Null</button>
         <button onclick="getNumbersFromButtonToInput(1)">1</button>
         <button onclick="getNumbersFromButtonToInput(2)">2</button>
-        <button onclick="clickedOperator()">*</button>
+        <button onclick="clickedOperator('*')">*</button>
         <button onclick="getNumbersFromButtonToInput(3)">3</button>
         <button onclick="getNumbersFromButtonToInput(4)">4</button>
-        <button onclick="getNumbersFromButtonToInput('-')">-</button>
+        <button onclick="clickedOperator('-')">-</button>
         <button onclick="getNumbersFromButtonToInput(5)">5</button>
         <button onclick="getNumbersFromButtonToInput(6)">6</button>
-        <button onclick="getNumbersFromButtonToInput('+')">+</button>
-        <button onclick="getNumbersFromButtonToInput(7)">7</button>
+        <button onclick="clickedOperator('+')">+</button>        <button onclick="getNumbersFromButtonToInput(7)">7</button>
         <button onclick="getNumbersFromButtonToInput(8)">8</button>
-        <button onclick="getNumbersFromButtonToInput('/')">/</button>
+        <button onclick="clickedOperator('/')">/</button>
         <button onclick="getNumbersFromButtonToInput(9)">9</button>
-        <button style="grid-column: span 2;" onclick="calculations()">=</button>
-
+        <button onclick="findMaxNum()">Max</button>
+        <button onclick="calculations()">=</button>
+        
         <script>
 
             let inputtedNumbers1;
             let inputtedNumbers2;
+            let inputtedNumbers3;
+            let usedOperator;
+
 
             function calculations(){
-
+                if(usedOperator == '*'){
                 let calculatedNumber = Number(inputtedNumbers2) * Number(getInputtedNumbers());
-            document.getElementById("inputField").value = calculatedNumber;
-                console.log(inputtedNumbers2)
-                console.log(getInputtedNumbers())
-
+                document.getElementById("inputField").value = calculatedNumber;
+                }
+                if(usedOperator == '/'){
+                let calculatedNumber = Number(inputtedNumbers2) / Number(getInputtedNumbers());
+                document.getElementById("inputField").value = calculatedNumber;
+                }
+                if(usedOperator == '+'){
+                let calculatedNumber = Number(inputtedNumbers2) + Number(getInputtedNumbers());
+                document.getElementById("inputField").value = calculatedNumber;
+                }
+                if(usedOperator == '-'){
+                let calculatedNumber = Number(inputtedNumbers2) - Number(getInputtedNumbers());
+                document.getElementById("inputField").value = calculatedNumber;
+                }
             }
 
-            function clickedOperator(){
+            function findMaxNum(num1,num2,num3){
+    
+                inputtedNumbers3 = num1;
+                inputtedNumbers2 = num2;
+                inputtedNumbers1 = num3;
+
+                if(inputtedNumbers3 > inputtedNumbers2 && inputtedNumbers3 > inputtedNumbers1){
+                    return document.getElementById("inputField").value = inputtedNumbers3;
+                }                
+                else if(inputtedNumbers2 > inputtedNumbers2 && inputtedNumbers2 > inputtedNumbers3){
+                    return document.getElementById("inputField").value = inputtedNumbers2;
+                }                
+                else if(inputtedNumbers1 > inputtedNumbers3 && inputtedNumbers1 > inputtedNumbers2){
+                    return document.getElementById("inputField").value = inputtedNumbers1;
+                }                
+            }
+
+            function clickedOperator(Operator){
                 getInputtedNumbers();
+                usedOperator = Operator;
                 inputtedNumbers2 = inputtedNumbers1;
                 removeInput();
-
             }
 
             function getInputtedNumbers(){

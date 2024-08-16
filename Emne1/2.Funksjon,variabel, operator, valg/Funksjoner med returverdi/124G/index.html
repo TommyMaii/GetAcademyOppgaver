@@ -24,7 +24,6 @@
                 createNumberSelector(13, 1, 31, 'Day')
                 + createNumberSelector(8, 1, 12, 'Month')
                 + createNumberSelector(2023, 2020, 2025, 'Year');
-                console.log(document.getElementById('DayMain').value)
         }
 
         function createNumberSelector(shownNumber, minNum, maxNum, type){
@@ -64,19 +63,18 @@
                     <button onclick="select${type}(${shownNumber+1})">▲</button>
                     <button onclick="select${type}(${shownNumber-1})">▼</button>
                 </div>
-
                 `
             }
         }
         
         function selectDay(day){
             document.getElementById('DayMain').innerHTML =
-                    createNumberSelector(day, 1, 31, 'Day');
+                    createNumberSelector(day, 1, 31, 'Day') 
         }
         
         function selectMonth(month){
-            document.getElementById('MonthMain').outerHTML =
-                createNumberSelector(month, 1, 12, 'Month');
+            document.getElementById('MonthMain').outerHTML = 
+            createNumberSelector(month, 1, 12, 'Month');
         }
 
         function selectYear(year){
