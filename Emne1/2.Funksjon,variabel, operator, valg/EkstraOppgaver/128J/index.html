@@ -11,6 +11,7 @@
             display:flex;
             font-weight: 500;
             border-radius: 20px;
+            height:100px;
         }
         .gridItem{
             border: 1px solid gray;
@@ -29,43 +30,86 @@
 
     window.onload = createBoard();
 
-    let emptyDivC = 1;
-    let emptyRowStart = 1;
-    let emptyRowEnd = 1;
+
+    
 
     function createBoard(){
-        document.getElementById("grid").innerHTML = 
+        document.getElementById("grid").innerHTML = /*HTML*/
 
         `
-        <div style="grid-column: 1; grid-row: 1/1;" id="0"></div>
-        <div style="grid-column: 2; grid-row: 1/2;" class="gridItem grids" id="1" onclick="changePlace(0,1,2,1,2,1)"><h3>1</h3></div>
-        <div style="grid-column: 3; grid-row: 1/3; height:100px" class="gridItem grids" id="2" onclick="changePlace(2,3,1,3,2)"><h3>2</h3></div>
-        <div style="grid-column: 1; grid-row: 2/3;" class="gridItem grids" id="square3" onclick="changePlace('square',1,2,3,3)"><h3>3</h3></div>
-        <div style="grid-column: 2; grid-row: 2/3;" class="gridItem grids" id="square4" onclick="changePlace('square',2,2,3,4)"><h3>4</h3></div>
-        <div style="grid-column: 3; grid-row: 2/3;" class="gridItem grids" id="square5" onclick="changePlace('square',3,2,3,5)"><h3>5</h3></div>
-        <div style="grid-column: 1; grid-row: 3/3;" class="gridItem grids" id="square6" onclick="changePlace('square',1,3,3,6)"><h3>6</h3></div>
-        <div style="grid-column: 2; grid-row: 3/3;" class="gridItem grids" id="square7" onclick="changePlace('square',2,3,3,7)"><h3>7</h3></div>
-        <div style="grid-column: 3; grid-row: 3/3;" class="gridItem grids" id="square8" onclick="changePlace('square',3,3,3,8)"><h3>8</h3></div>
+        <div style="grid-column: 1; grid-row: 1/1;" >
+            <div id="square0" onclick="changePlace(this, 'square1', 'square3', 'square3', 'square3')"></div >    
+        </div>
+        <div style="grid-column: 2; grid-row: 1/2;" >
+            <div class="gridItem grids"  id="square1" onclick="changePlace(this, 'square0', 'square2', 'square4', 'square4')">
+            <h3>1</h3>
+            </div>
+        </div>
+        <div style="grid-column: 3; grid-row: 1/3; height:100px" id="square2" onclick="changePlace(this, 'square1', 'square5', 'square5', 'square5')">
+            <div class="gridItem grids">
+            <h3>3</h3>
+            </div>
+            </div>
+        <div style="grid-column: 1; grid-row: 2/3;" id="square3" onclick="changePlace(this, 'square0', 'square4', 'square6', 'square6')">
+            <div class="gridItem grids">
+            <h3>4</h3>
+            </div>
+            </div>
+        <div style="grid-column: 2; grid-row: 2/3;" id="square4" onclick="changePlace(this, 'square1', 'square3', 'square7', 'square5')">
+            <div class="gridItem grids">
+            <h3>2</h3>
+            </div>
+            </div>
+        <div style="grid-column: 3; grid-row: 2/3;" id="square5" onclick="changePlace(this, 'square2', 'square4', 'square8', 'square8')">
+            <div class="gridItem grids">
+            <h3>5</h3>
+            </div>
+            </div>
+        <div style="grid-column: 1; grid-row: 3/3;" id="square6" onclick="changePlace(this, 'square3', 'square7', 'square7', 'square7')">
+            <div class="gridItem grids">
+            <h3>7</h3>
+            </div>
+            </div>
+        <div style="grid-column: 2; grid-row: 3/3;" id="square7" onclick="changePlace(this, 'square4', 'square6', 'square8', 'square4')">
+            <div class="gridItem grids">
+            <h3>8</h3>
+            </div>
+            </div>
+        <div style="grid-column: 3; grid-row: 3/3;" id="square8" onclick="changePlace(this, 'square7', 'square5', 'square5', 'square5')">
+            <div class="gridItem grids">
+            <h3>6</h3>
+            </div>
+            </div>
         `
     }
 
-    function changePlace(IDToChange,ID, Col, RowStart, RowEnd, Number){
+    function changePlace(changedElement, s1,s2,s3,s4){
 
-        document.getElementById(IDToChange).outerHTML = /*HTML*/
-        `
-        <div style="grid-column: ${Col}; grid-row: ${RowStart}/${RowEnd}; height:100px, width:100px" class="gridItem" id="${ID}" onclick="changePlace('${ID}',${Col},${RowStart},${RowStart},${Number})"><h3>${Number}</h3></div>
-        `
-        removeGridObject(ID);
+        console.log(changedElement)
+
+       if(document.getElementById(s1).innerHTML==''){
+        document.getElementById(s1).innerHTML = changedElement.innerHTML;
+        changedElement.innerHTML = '';
+       }
+    
+       if(document.getElementById(s2).innerHTML==''){
+        document.getElementById(s2).innerHTML = changedElement.innerHTML;
+        changedElement.innerHTML = '';
+       }
+    
+       if(document.getElementById(s3).innerHTML==''){
+        document.getElementById(s3).innerHTML = changedElement.innerHTML;
+        changedElement.innerHTML = '';
+       }
+    
+       if(document.getElementById(s4).innerHTML==''){
+        document.getElementById(s4).innerHTML = changedElement.innerHTML;
+        changedElement.innerHTML = '';
+       }
+    
 
     }
 
-    function removeGridObject(ID){
-        
-        return document.getElementById(ID).outerHTML = /*HTML*/
-        `
-        <div id="0"></div>
-        `
-    }
 
     </script>
     
