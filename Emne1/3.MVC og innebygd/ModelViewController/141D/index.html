@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app"></div>
+
+    <script>
+        //Model
+        let name;
+        let email;
+        let registered;
+
+
+
+        //Controller
+        function register(){
+            name = document.getElementById("nameInput").value;
+            email = document.getElementById("emailInput").value;
+            registered = true;
+            updateView();
+        }
+        function sendBack(){
+            registered = false;
+            updateView();
+        }
+
+
+        //View
+        updateView()
+        function updateView(){
+            RegisterForm =            
+            `
+            <h3>Navn:</h3>
+            <input type="text" id="nameInput" value="${name || ''}">
+            <br>
+            <h3>Email:</h3>
+            <input type="email" id="emailInput" value="${email || ''}">
+            <br>
+            <button style="margin-top: 20px;" onclick="register()">Registrer</button>
+            `;
+
+            RegisteredView =            
+            `
+            <h3>Navn: ${name}</h3>
+            <br>
+            <h3>Email: ${email}</h3>
+            <br>
+            <button style="margin-top: 20px;" onclick="sendBack()">Tilbake</button>
+            `;
+
+            document.getElementById("app").innerHTML = 
+            registered ? RegisteredView : RegisterForm;
+        }
+
+    </script>
+    
+</body>
+</html>
