@@ -66,7 +66,6 @@ Kalle en JavaScript-funksjon fra onclick på en button -->
             `
         }
 
-
         function revealDog1(){
 
             document.getElementById("board").innerHTML = /*HTML*/
@@ -93,9 +92,9 @@ Kalle en JavaScript-funksjon fra onclick på en button -->
 
         document.getElementById("board").innerHTML = /*HTML*/
             `
-            <div id="frog1" onclick="reset()"></div>
+            <div id="frog1" onclick="revealFrog1WithDogs()"></div>
             <div id="dog1"><img src="img/dog.jpg"></div>
-            <div id="frog2" onclick="reset()"></div>
+            <div id="frog2" onclick="revealFrog2WithDogs()"></div>
             <div id="dog2"><img src="img/dog.jpg"></div>
             `
         }
@@ -104,14 +103,75 @@ Kalle en JavaScript-funksjon fra onclick på en button -->
             document.getElementById("board").innerHTML = /*HTML*/
             `
             <div id="frog1"><img src="img/frog.jpg"></div>
-            <div id="dog1" onclick="reset()"></div>
+            <div id="dog1" onclick="revealDog1WithFrogs()"></div>
             <div id="frog2"><img src="img/frog.jpg"></div>
-            <div id="dog2" onclick="reset()"></div>
+            <div id="dog2" onclick="revealDog2WithFrogs()"></div>
             `
         }
+
+        function revealDog1WithFrogs(){
+
+        document.getElementById("board").innerHTML = /*HTML*/
+            `
+            <div id="frog1"><img src="img/frog.jpg"></div>
+            <div id="dog1"><img src="img/dog.jpg"></div>
+            <div id="frog2"><img src="img/frog.jpg"></div>
+            <div id="dog2" onclick="revealAll()" ></div>
+            `
+        }   
+
+        function revealDog2WithFrogs(){
+
+        document.getElementById("board").innerHTML = /*HTML*/
+            `
+            <div id="frog1"><img src="img/frog.jpg"></div>
+            <div id="dog1" onclick="revealAll()"></div>
+            <div id="frog2"><img src="img/frog.jpg"></div>
+            <div id="dog2" ><img src="img/dog.jpg"></div>
+            `
+        } 
+
+        
+        function revealFrog1WithDogs(){
+
+        document.getElementById("board").innerHTML = /*HTML*/
+            `
+            <div id="frog1"><img src="img/frog.jpg"></div>
+            <div id="dog1"><img src="img/dog.jpg"></div>
+            <div id="frog2" onclick="revealAll()"></div>
+            <div id="dog2"><img src="img/dog.jpg"></div>
+            `
+        } 
+
+        function revealFrog2WithDogs(){
+
+        document.getElementById("board").innerHTML = /*HTML*/
+            `
+            <div id="frog1" onclick="revealAll()"></div>
+            <div id="dog1"><img src="img/dog.jpg"></div>
+            <div id="frog2"><img src="img/frog.jpg"></div>
+            <div id="dog2"><img src="img/dog.jpg"></div>
+            `
+        } 
+        
+
+        function revealAll(){
+            document.getElementById("board").innerHTML = /*HTML*/
+            `
+            <div id="frog1"><img src="img/frog.jpg"></div>
+            <div id="dog1"><img src="img/dog.jpg"></div>
+            <div id="frog2"><img src="img/frog.jpg"></div>
+            <div id="dog2"><img src="img/dog.jpg"></div>
+            <button onclick="resetOnWin()">Gratulerer</button>
+            `
+        }
+
         
         function reset(){
-
+            location.reload();
+        }
+        function resetOnWin(){
+            alert("Du er så flinK!!! Du klarte å huske 4 hele bilder.")
             location.reload();
         }
 
