@@ -14,6 +14,7 @@
         //model
         let fColor;
         let bColor;
+        let showDiv;
 
         updateView();
 
@@ -21,7 +22,8 @@
         function setDivColors(){
             bColor = document.getElementById("selectFcolor").value;
             fColor = document.getElementById("selectBColor").value;
-            addDiv();
+            showDiv = true;
+            updateView();
         }
 
         //View
@@ -47,12 +49,10 @@
 
                 <button style="width:100px; height:100px;" onclick="setDivColors()">Legg til div</button>
             `;
+
+            showDiv ? document.body.innerHTML += `<div style="color:${bColor}; background-color:${fColor};">Hei på deg</div>` : '';
+
         };
-
-        function addDiv(){
-            document.body.innerHTML += /*HTML*/ `<div style="color:${bColor}; background-color:${fColor};">Hei på deg</div>`;
-
-        }
 
     </script>
     
