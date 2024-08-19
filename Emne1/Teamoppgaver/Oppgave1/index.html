@@ -1,0 +1,122 @@
+<!-- Med kun pensum fra uke/modul 1, skal dere kunne få til følgende:
+Alle ruter skal være lukket (grå) fra start
+Hvis man trykker på en rute, kommer bildet til syne FERDIG
+Hvis man trykker på en rute til etter det, er det to muligheter:
+Hvis man har trykket på et likt bilde, skal det også vises
+Ellers skal man gå tilbake til å vise alle rutene lukket FERDIG
+Til dette trenger dere kun grunnferdighetene:
+Endre HTML til en tagg ut fra id
+Pakke en eller flere endringer inn i en JavaScript-funksjon
+Kalle en JavaScript-funksjon fra onclick på en button -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #board{
+            display: grid;
+            grid-template-columns: repeat(2, 200px);
+            grid-template-rows: repeat(2, 200px);
+        }
+
+        #board > div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid gray;
+            background-color: darkgray;
+        }
+        img{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="board">
+        <div id="frog1" onclick="revealFrog1()"></div>
+        <div id="dog1" onclick="revealDog1()"></div>
+        <div id="frog2" onclick="revealFrog2()"></div>
+        <div id="dog2" onclick="revealDog2()"></div>
+    </div>
+    
+    <script>
+
+        function revealFrog1(){
+
+            document.getElementById("board").innerHTML = /*HTML*/
+            `
+            <div id="frog1"><img src="img/frog.jpg"></div>
+            <div id="dog1" onclick="reset()"></div>
+            <div id="frog2" onclick="revealBothFrogs()"></div>
+            <div id="dog2" onclick="reset()"></div>
+            `
+        }
+
+        function revealFrog2(){
+
+            document.getElementById("board").innerHTML = /*HTML*/
+            `
+            <div id="frog1" onclick="revealBothFrogs()"></div>
+            <div id="dog1" onclick="reset()"></div>
+            <div id="frog2"><img src="img/frog.jpg"></div>
+            <div id="dog2" onclick="reset()"></div>
+            `
+        }
+
+
+        function revealDog1(){
+
+            document.getElementById("board").innerHTML = /*HTML*/
+            `
+            <div id="frog1"onclick="reset()"></div>
+            <div id="dog1"><img src="img/dog.jpg"></div>
+            <div id="frog2" onclick="reset()"></div>
+            <div id="dog2" onclick="revealBothDogs()"></div>
+            `
+        }
+
+        function revealDog2(){
+
+            document.getElementById("board").innerHTML = /*HTML*/
+            `
+            <div id="frog1" onclick="reset()"></div>
+            <div id="dog1" onclick="revealBothDogs()"></div>
+            <div id="frog2" onclick="reset()"></div>
+            <div id="dog2" ><img src="img/dog.jpg"></div>
+            `
+        }
+        
+        function revealBothDogs(){
+
+        document.getElementById("board").innerHTML = /*HTML*/
+            `
+            <div id="frog1" onclick="reset()"></div>
+            <div id="dog1"><img src="img/dog.jpg"></div>
+            <div id="frog2" onclick="reset()"></div>
+            <div id="dog2"><img src="img/dog.jpg"></div>
+            `
+        }
+
+        function revealBothFrogs(){
+            document.getElementById("board").innerHTML = /*HTML*/
+            `
+            <div id="frog1"><img src="img/frog.jpg"></div>
+            <div id="dog1" onclick="reset()"></div>
+            <div id="frog2"><img src="img/frog.jpg"></div>
+            <div id="dog2" onclick="reset()"></div>
+            `
+        }
+        
+        function reset(){
+
+            location.reload();
+        }
+
+    </script>
+
+
+</body>
+</html>
