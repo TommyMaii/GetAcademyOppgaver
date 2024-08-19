@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app"></div>
+
+    <script>
+
+        //model
+        let fColor;
+        let bColor;
+
+        updateView();
+
+        //controller
+        function setDivColors(){
+            bColor = document.getElementById("selectFcolor").value;
+            fColor = document.getElementById("selectBColor").value;
+            addDiv();
+        }
+
+        //View
+        function updateView(){
+            document.getElementById("app").innerHTML = 
+            `
+                    <div>
+                        <p>Foreground Color</p>
+                        <select name="fcolor" id="selectFcolor">
+                            <option value="Red">Red</option>
+                            <option value="Blue">Blue</option>
+                            <option value="Green">Green</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Background Color</p>
+                        <select name="bcolor" id="selectBColor">
+                            <option value="Blue">Blue</option>
+                            <option value="Red">Red</option>
+                            <option value="Green">Green</option>
+                        </select>
+                    </div>
+
+                <button style="width:100px; height:100px;" onclick="setDivColors()">Legg til div</button>
+            `;
+        };
+
+        function addDiv(){
+            document.body.innerHTML += /*HTML*/ `<div style="color:${bColor}; background-color:${fColor};">Hei på deg</div>`;
+
+        }
+
+    </script>
+    
+</body>
+</html>
