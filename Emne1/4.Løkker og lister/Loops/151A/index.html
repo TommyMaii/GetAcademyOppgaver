@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app"></div>
+
+    <script>
+        let text = '';
+        let length;
+
+        show();
+
+        function findMaxLength(){
+            length = parseInt(document.getElementById("maxLength").value);
+        }
+
+        function doubleText(){
+            findMaxLength();
+            while(text.length < length){
+                text += document.getElementById("text").value;
+                show()
+            }
+        }
+
+        function show(){
+            document.getElementById("app").innerHTML = /*HTML*/
+            `
+            <input type="text" id="text" value="hei">
+            <input type="number" id="maxLength" oninput="length = this.value" value="${length}">
+            <button onclick="doubleText()">Gjenta</button>
+            <div>${text}</div>
+            `
+        }
+
+    </script>
+
+
+</body>
+</html>

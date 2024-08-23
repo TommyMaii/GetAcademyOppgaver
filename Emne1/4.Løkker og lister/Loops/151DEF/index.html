@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app"></div>
+
+    <script>
+
+        let inputValue;
+        let countedCharacters;
+        let firstTime = true;
+        let count = 0;
+        let checkedCharacter;
+        show();
+
+        function countCharacters(char){
+            firstTime = false;
+            for(i = 0; i < inputValue.length; i++){
+                console.log(checkedCharacter)
+                console.log(inputValue)
+                if(inputValue.charAt(i).toLowerCase() == checkedCharacter){count++;}
+            };
+            show();
+        }
+
+
+        function show(){
+            count = firstTime ? '' : 'Vi fant bokstaven ' + count + ' gang/ganger'
+            document.getElementById("app").innerHTML = /*HTML*/
+            `
+            <label>Tekst
+            <br>
+            <input type="text" oninput="inputValue = this.value">
+            <br>
+            <label>Velg bokstav
+            <br>
+            <input type="text" oninput="checkedCharacter = this.value">
+            <br>
+            <br>
+
+            <button onclick="countCharacters()">Tell hvor mange ganger bokstaven kommer i din tekst!!!!</button>
+            <div>${count}</div>
+            `
+        }
+
+    </script>
+    
+</body>
+</html>

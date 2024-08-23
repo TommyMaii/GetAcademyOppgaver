@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+        <label>StartValue
+            <br>
+            <input type="number" id="startValue" oninput="sValue = this.value">
+            <br>
+            <label>EndValue
+            <br>
+            <input type="number" id="endValue" oninput="eValue = this.value">
+            <br>
+            <label>Difference
+            <br>
+            <input type="number" id="difference" oninput="diff = this.value">
+            <button onclick="count()">Beregn</button>
+    </div>
+
+    <script>
+        let sValue;
+        let eValue;
+        let diff;
+        let firsTime = true;
+
+        show();
+
+        function getValues(){
+            sValue = parseInt(document.getElementById("startValue").value); 
+            eValue =  parseInt(document.getElementById("endValue").value);
+            diff = parseInt(document.getElementById("difference").value);
+        }
+
+        function count(){
+            firsTime=false;
+            getValues();
+            if(diff <= 0){
+                alert('Only 0 or above here stop cheesing')
+            }
+            else{
+            for(sValue; sValue < eValue; sValue + diff){
+                sValue += diff;
+                console.log(sValue)
+                show();
+            }
+        }
+        }
+
+        function show(){
+            sValue = firsTime ? '' : sValue
+            document.getElementById("app").innerHTML += /*HTML*/
+            `
+            <div>${sValue}</div>
+            `
+
+        }
+
+    </script>
+
+
+</body>
+</html>

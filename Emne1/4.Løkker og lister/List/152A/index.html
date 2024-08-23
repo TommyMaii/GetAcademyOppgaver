@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+    </div>
+    
+    <script>
+
+        let data = [];
+        show();
+
+
+        function createAndReturnData(pageIndex, pageSize){
+            let skipCount = pageIndex * pageSize;
+            let takeCount = pageSize;
+            for(i = 0; i < 1000; i++){
+                skipCount--;
+                if(skipCount >= 0) {continue}
+                if(takeCount <= 0) {break}
+                takeCount--;
+                data.push(100 + 7 * i);
+                show();
+            }
+        }
+
+        
+
+        function createLinks(pages, pageSize){     
+            data = []
+            createAndReturnData(pages, pageSize)
+        }
+
+        
+
+        function show(){
+            document.getElementById("app").innerHTML = /*HTML*/ 
+            `
+            <div id="data">${data}</div>
+            <a href="javascript:createLinks(0, 10);">1</a>
+            <a href="javascript:createLinks(1, 10);">2</a>
+            <a href="javascript:createLinks(2, 10);">3</a>
+            <a href="javascript:createLinks(3, 10);">4</a>
+            <a href="javascript:createLinks(4, 10);">5</a>
+            <a href="javascript:createLinks(5, 10);">6</a>
+            <a href="javascript:createLinks(6, 10);">7</a>
+            <a href="javascript:createLinks(7, 10);">8</a>
+            <a href="javascript:createLinks(8, 10);">9</a>
+            <a href="javascript:createLinks(9, 10);">10</a>
+            <a href="javascript:createLinks(10, 10);">11</a>
+            <a href="javascript:createLinks(11, 10);">12</a>
+            <a href="javascript:createLinks(12, 10);">13</a>
+            
+            `
+        }
+
+    </script>
+
+
+</body>
+</html>

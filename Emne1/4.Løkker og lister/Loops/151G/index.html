@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <pre id="output"></pre>
+
+
+    <script>
+    //151G
+    // writeText(1,8,1);
+    // writeText(2,6,1);
+    // writeText(3,4,1);
+    // writeText(4,2,1);
+
+    //151H
+    // writeText(3,2,1);
+    // writeText(2,4,1);
+    // writeText(1,6,1);
+    // writeText(0,8,1);
+    // writeText(0,8,1);
+    // writeText(1,6,1);
+    // writeText(2,4,1);
+    // writeText(3,2,1);
+
+    //151I
+    // writeNewText(3,1,12,1,1);
+    // writeNewText(4,2,8,2,1);
+    // writeNewText(5,3,4,3,1);
+    // writeNewText(6,4,0,4,1);
+    // writeNewText(6,4,0,4,1);
+    // writeNewText(5,3,4,3,1);
+    // writeNewText(4,2,8,2,1);
+    // writeNewText(3,1,12,1,1);
+
+
+    function writeText(space, hash, linebreak){
+        for(i = 0; i < space; i++){
+            writeSpace();
+        }
+        for(i = 0; i < hash; i++){
+            writeHash();
+        }
+        for(i = 0; i < linebreak; i++){
+            writeLineBreak();
+        }
+    }
+
+    function writeNewText(space1,hash1, space2, hash2, linebreak){
+        for(i = 0; i < space1; i++){
+            writeSpace();
+        }
+        for(i = 0; i < hash1; i++){
+            writeHash();
+        }
+        for(i = 0; i < space2; i++){
+            writeSpace();
+        }
+        for(i = 0; i < hash2; i++){
+            writeHash();
+        }
+        for(i = 0; i < linebreak; i++){
+            writeLineBreak();
+        }
+    }
+
+    function writeHash() {
+        document.getElementById('output').innerText += '#';
+    }
+
+    function writeSpace() {
+        document.getElementById('output').innerText += ' ';
+    }
+
+    function writeLineBreak() {
+        document.getElementById('output').innerText += '\n';
+    }
+
+
+    </script>
+
+</body>
+</html>

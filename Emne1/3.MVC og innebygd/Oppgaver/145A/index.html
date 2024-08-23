@@ -43,126 +43,86 @@
     <li>Lage egne kommandoer, dvs. funksjoner</li>
     <li>onclick</li>
 
-    <div id="app">
-            <div class="board">
-                <div class="square">
-                    </div>
-                <div class="square">
-                    </div>
-                <div class="square">
-                    <img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png">
-                </div>
-                <div class="square">
-                </div>
-            </div>
-            <div class="buttons">
-                <button onclick="showBoardWithLogoUpLeft()">▲</button>
-                <div>
-                    <button disabled="">◀</button>
-                    <button onclick="showBoardWithLogoDownRight()">▶</button>
-                </div>
-                <button disabled="">▼</button>
-            </div>
-            </div>
+    <div id="app"></div>
 
     <script>
-        showBoardWithLogoDownLeft();
 
-        function showBoardWithLogoUpLeft(){
-            document.getElementById('app').innerHTML = /*HTML*/`
+    //model
+    let topLeft;
+    let topRight;
+    let botRight;
+    let botLeft = true;
+    let disabled;
+
+
+    //controller
+    function changeLogoSquare(tLeft,tRight,bRight,bLeft){
+        topRight = tRight
+        topLeft = tLeft;
+        botLeft = bLeft;
+        botRight = bRight;
+        updateView();
+    }
+
+    function buttonClickUpandDown(){
+        if(botLeft){return changeLogoSquare(true,false,false,false)}
+        else if(botRight){return changeLogoSquare(false,true,false,false)} 
+        if(topLeft){; return changeLogoSquare(false,false,false,true)}
+        else if(topRight){return changeLogoSquare(false,false,true,false)} 
+        updateView();
+    }
+
+    function buttonClickLeftandRight(){
+        if(botLeft){return changeLogoSquare(false,false,true,false)}
+        else if(botRight) {return changeLogoSquare(false,false,false,true)} 
+        if(topLeft){return changeLogoSquare(false,true,false,false)}
+        else if(topRight){return changeLogoSquare(true,false,false,false)} 
+        updateView();
+    }
+
+        
+        updateView();
+    //View
+    function updateView(){
+        
+        showTopLeft = topLeft ? '<img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png">' : ''
+        showTopRight = topRight ? '<img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png">' : ''
+        showBotLeft = botLeft ? '<img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png">' : ''
+        showBotRight = botRight ? '<img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png">' : ''
+
+
+    
+
+
+            document.getElementById("app").innerHTML = /*HTML*/
+            `
             <div class="board">
                 <div class="square">
-                    <img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png" />
-                </div>
-                <div class="square">¨
-                </div>
-                <div class="square">
-                </div>
-                <div class="square">
-                </div>
-            </div>
-            <div class="buttons">
-                <button disabled>▲</button>
-                <div>
-                    <button disabled>◀</button>
-                    <button onclick="showBoardWithLogoUpRight()">▶</button>
-                </div>
-                <button onclick="showBoardWithLogoDownLeft()">▼</button>
-            </div>
-            `;
-        }
-
-        function showBoardWithLogoUpRight(){
-            document.getElementById('app').innerHTML = /*HTML*/`
-            <div class="board">
-                <div class="square">
-                    </div>
-                <div class="square">¨
-                    <img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png" />
-                </div>
-                <div class="square">
-                </div>
-                <div class="square">
-                </div>
-            </div>
-            <div class="buttons">
-                <button disabled>▲</button>
-                <div>
-                    <button onclick="showBoardWithLogoUpLeft()">◀</button>
-                    <button disabled>▶</button>
-                </div>
-                <button onclick="showBoardWithLogoDownRight()">▼</button>
-            </div>
-            `;
-        }
-
-        function showBoardWithLogoDownRight(){
-            document.getElementById('app').innerHTML = /*HTML*/`
-            <div class="board">
-                <div class="square">
-                </div>
-                <div class="square">
-                </div>
-                <div class="square">
-                </div>
-                <div class="square">
-                    <img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png" />
-                </div>
-            </div>
-            <div class="buttons">
-                <button onclick="showBoardWithLogoUpRight()">▲</button>
-                <div>
-                    <button onclick="showBoardWithLogoDownLeft()">◀</button>
-                    <button disabled>▶</button>
-                </div>
-                <button disabled>▼</button>
-            </div>
-            `;
-        }
-
-        function showBoardWithLogoDownLeft(){
-            document.getElementById('app').innerHTML = /*HTML*/`
-            <div class="board">
-                <div class="square">
+                    ${showTopLeft}
                     </div>
                 <div class="square">
+                    ${showTopRight}
                     </div>
                 <div class="square">
-                    <img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png" />
+                    ${showBotLeft}
                 </div>
                 <div class="square">
+                    ${showBotRight}
                 </div>
             </div>
             <div class="buttons">
-                <button onclick="showBoardWithLogoUpLeft()">▲</button>
+                <button onclick="buttonClickUpandDown()" ${disabled} >▲</button>
                 <div>
-                    <button disabled>◀</button>
-                    <button onclick="showBoardWithLogoDownRight()">▶</button>
+                    <button onclick="buttonClickLeftandRight()">◀</button>
+                    <button onclick="buttonClickLeftandRight()">▶</button>
                 </div>
-                <button disabled>▼</button>
+                <button onclick="buttonClickUpandDown()">▼</button>
             </div>
             `;
+
+
         }
+
 
     </script>
 

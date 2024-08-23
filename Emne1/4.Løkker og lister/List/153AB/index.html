@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+    </div>
+    
+    <script>
+        let data = []
+        show(getEvenNumbers(createAndReturnData()));
+      ;
+
+        function createAndReturnData(){
+            for(i = 0; i < 150; i++){
+                data.push(100 + 7 * i);
+                if(parseInt(data[i]) > 1000){break} 
+            }
+            return data;
+        }
+
+        function getEvenNumbers(numbers){
+            let evenNumbers = [];
+            for(let number of numbers){
+                if(number % 2 == 0) {
+                    evenNumbers.push(number);
+                }
+            }
+            return evenNumbers;
+        }
+
+        function show(values){
+            document.getElementById("app").innerHTML = /*HTML*/ 
+            `
+            <div>${values}</div>
+            `
+        }
+
+    </script>
+
+
+</body>
+</html>

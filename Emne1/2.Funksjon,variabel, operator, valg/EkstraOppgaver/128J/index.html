@@ -37,11 +37,11 @@
         document.getElementById("grid").innerHTML = /*HTML*/
 
         `
-        <div style="grid-column: 1; grid-row: 1/1;" >
-            <div id="square0" onclick="changePlace(this, 'square1', 'square3', 'square3', 'square3')"></div >    
+        <div style="grid-column: 1; grid-row: 1/1;" onclick="changePlace(this, 'square1', 'square3', 'square3', 'square3')" >
+            <div id="square0" ></div >    
         </div>
-        <div style="grid-column: 2; grid-row: 1/2;" >
-            <div class="gridItem grids"  id="square1" onclick="changePlace(this, 'square0', 'square2', 'square4', 'square4')">
+        <div style="grid-column: 2; grid-row: 1/2;" id="square1" onclick="changePlace(this, 'square0', 'square2', 'square4', 'square4')">
+            <div class="gridItem grids"  >
             <h3>1</h3>
             </div>
         </div>
@@ -107,7 +107,6 @@
         changedElement.innerHTML = '';
        }
     
-
     }
 
 

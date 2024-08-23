@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+
+    </div>
+
+    <script>
+
+        let inputtedText;
+        let reversedText;
+        let firsTime = true;
+
+        show();
+
+        function getInputtedText(){
+            document.getElementById()
+        }
+
+        function reverseText(text){
+            firsTime = false;
+            inputtedText = text;
+            for (i = 0; i <= inputtedText.length; i++){
+                reversedText += inputtedText.charAt(inputtedText.length-i);
+                show();
+            }
+        }
+
+
+        function show(){
+            reversedText = firsTime ? '' : reversedText;
+
+            document.getElementById("app").innerHTML = /*HTML*/
+            `
+            <input type="text" id="inputText" oninput="inputtedText = this.value">
+            <button onclick="reverseText(inputtedText)">Reverser tekst!</button>
+            <div>${reversedText}</div>
+            `
+
+        }
+
+
+
+    </script>
+
+
+</body>
+</html>

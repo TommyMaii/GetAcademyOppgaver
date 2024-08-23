@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app"></div>
+
+    <script>
+
+
+        //model
+        let guessedLetters = '';
+        let secretTxt = 'hei';
+        let shownText = '___';
+        let inputValue = 'h';
+
+        show();
+
+        //controller
+        //Funksjonen finner kun første indeks
+        function evaluateHangman(secretText, currentText, guessedLetter){
+            const index = secretText.indexOf(guessedLetter);
+            guessedLetters += guessedLetter 
+            if(index >= 0){
+            const currentTextBeforeGuessedLetter = currentText.substring(0, index);     
+            const currentTextAfterGuessedLetter = currentText.substring(index + 1);
+            shownText = currentTextBeforeGuessedLetter + guessedLetter + currentTextAfterGuessedLetter; 
+            show();
+        }
+        }
+
+        //view
+        function show(){
+            document.getElementById("app").innerHTML = /*HTML*/
+            `
+            <h1>Hangman, guess the word!</h1>
+            <h2>Guessed letters: ${guessedLetters}</h2>
+            <h3>${shownText}</h3>
+            <input type="text" oninput="inputValue = this.value" id="inputt">
+            <button onclick="evaluateHangman('${secretTxt}','${shownText}','${inputValue}')">Guess character</button>
+            `
+            }
+
+            
+    </script>
+
+</body>
+</html>

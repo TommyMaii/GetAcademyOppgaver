@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+    </div>
+    
+    <script>
+
+        let data = [1000,2590,1,2425,21,214,5,530,23];
+        let calcedNumber = 0;
+        show();
+        calculateData(data);
+       
+        function calculateData(inputData){
+            for(i = 0; i < inputData.length; i++){
+                calcedNumber += inputData[i]
+                show();
+            }
+        }
+
+        function show(){
+            document.getElementById("app").innerHTML = /*HTML*/ 
+            `
+            <div>${calcedNumber}</div>
+            `
+        }
+
+    </script>
+
+
+</body>
+</html>
