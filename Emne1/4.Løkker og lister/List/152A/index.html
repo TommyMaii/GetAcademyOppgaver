@@ -17,16 +17,23 @@
 
 
         function createAndReturnData(pageIndex, pageSize){
+            //NOTES TIL MEG SELV HVORDAN DETTE FUNGERER ER
+            //LOOPEN SKIPPER ALT UNDER IF SKIPCOUNT
+            //MEN VARIABLEN I GÅR OPPOVER
+            //DERFOR FÅR MAN HØYERE *INDEX*
+            //SKIPCOUNT TELLER DA NED F.EKS FRA 49 OG NEDOVER
+            //NÅR DU TRYKKER PÅ PAGE 5 TAKECOUNT OG DATA PUSH
+            //KJØRES DA KUN ETTER LOOPEN HAR KJØRT 49 GANGER OG GÅR NED TIL MINUS TALL
             let skipCount = pageIndex * pageSize;
             let takeCount = pageSize;
-            for(i = 0; i < 1000; i++){
+            for(i = 0; i < 200; i++){
                 skipCount--;
-                if(skipCount >= 0) {continue}
-                if(takeCount <= 0) {break}
+                if(skipCount >= 0) {continue}; //SKIP ITERATION
+                if(takeCount <= 0) {break};
                 takeCount--;
                 data.push(100 + 7 * i);
-                show();
             }
+            show();
         }
 
         

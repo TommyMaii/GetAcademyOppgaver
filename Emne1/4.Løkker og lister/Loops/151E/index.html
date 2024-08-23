@@ -6,6 +6,42 @@
     <title>Document</title>
 </head>
 <body>
+
+    <div id="app"></div>
+
+    <script>
+
+        let text = 'Hei jeg heter tommy og jeg er 29 år og går på getacademy'
+        let longestWord = '';
+        let howManyWords = 0;
+        show();
+        findLongestWord();
+
+        function findLongestWord(){
+            splitText = text.split(" ");
+            console.log(splitText);
+            for(i = 0; i < splitText.length; i++){
+                if(splitText[i].length > longestWord){
+                    longestWord = splitText[i];
+                }
+            }
+            show();
+        }
+
+        function show(){
+            document.getElementById("app").innerHTML = 
+            `
+            Skriv din tekst her! <br>
+            <input id="input" type="text" oninput="text = this.value">
+            <button onclick="findLongestWord()"></button>
+            <br>
+            ${text} <br>
+            The longest word is: ${longestWord} <br>
+            How many words is in this shit: ${howManyWords}
+            `;
+        }
+
+    </script>
     
 </body>
 </html>
