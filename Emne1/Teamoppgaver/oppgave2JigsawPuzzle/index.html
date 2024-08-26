@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div style="display: grid; grid-template-columns: 32em auto; grid-template-rows: auto 8em; height: 95vh; grid-template-areas: 'board text' ' buttons buttons'">
+        <div id="board" style="grid-area: board;"></div>
+        <div id="exerciseText" style="overflow-y: scroll;height: 32em;grid-area: text;"></div>
+        <div id="buttons" style="background-color: lightblue;grid-area: buttons;"></div>
+    </div>
+    <script>
+
+        let verticalPosition = 0;
+        let horizontalPosition = 24;
+        let colorPuzzlePiece = 1;
+
+        // addPuzzlePiece('board', false, false, true, true, '', 1, 24, 0);
+        // addPuzzlePiece('board', false, true, true, true, '', 2, 18, 0);
+        // addPuzzlePiece('board', false, true, true, true, '', 1, 12, 0);
+        // addPuzzlePiece('board', true, false, true, true, '', 2, 24, 6);
+
+        addPuzzlePiece('buttons', true, true, true, true, 'addNormalPuzzlePieceToBoard()', 1);
+        addPuzzlePiece('buttons', false, true, true, true, 'addPuzzlePieceWithoutTopToBoard()', 2);
+        addPuzzlePiece('buttons', true, false, true, true, 'addPuzzlePieceWithoutRightToBoard()', 1);
+        addPuzzlePiece('buttons', true, true, false, true, 'addPuzzlePieceWithoutBottomToBoard()', 2);
+        addPuzzlePiece('buttons', true, true, true, false, 'addPuzzlePieceWithoutLeftToBoard()', 1);
+        addPuzzlePiece('buttons', false, false, true, true, 'addPuzzlePieceWithoutRightAndTopToBoard()', 2);
+        addPuzzlePiece('buttons', false, true, true, false, 'addPuzzlePieceWithoutLeftAndTopToBoard()', 1);
+        addPuzzlePiece('buttons', true, true, false, false, 'addPuzzlePieceWithoutLeftAndBottomToBoard()', 2);
+        addPuzzlePiece('buttons', true, false, false, true, 'addPuzzlePieceWithoutRightAndBottomToBoard()', 1);
+        function addPuzzlePiece(toId, hasTop, hasRight, hasBottom, hasLeft, onclick, color, leftPosition, topPosition) {
+            let style = '';
+            if (leftPosition !== undefined) {
+                style = `left: ${leftPosition + 0.5}em; top: ${topPosition + 0.5}em`;
+            }
+
+            document.getElementById(toId).innerHTML += /*HTML*/`
+                <div class="jigsaw${color}" onclick="${onclick}" style="${style}">
+                    ${hasTop ? `<span class="t"></span>` : ''}
+                    ${hasRight ? `<span class="r"></span>` : ''}
+                    ${hasBottom ? `<span class="b"></span>` : ''}
+                    ${hasLeft ? `<span class="l"></span>` : ''}
+                </div>            
+            `;
+        }
+
+        //HORIZONTALPOSITION = 24 = Right Side
+        //HORIZONTALPOSITION = 0 = Left Side
+        //VERTICALPOSITION = 0 = Top Side
+        //VERTICALPOSITION = 24 = Bottom Side
+        function addNormalPuzzlePieceToBoard(){
+            if((horizontalPosition == 24 || horizontalPosition == 0) || (verticalPosition == 0 || verticalPosition >= 24))return;
+            addPuzzlePiece('board', true, true, true, true, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
+            nextPosition();
+        }
+
+        function addPuzzlePieceWithoutTopToBoard(){
+            if((horizontalPosition == 24 || horizontalPosition == 0) || verticalPosition != 0)return;
+            addPuzzlePiece('board', false, true, true, true, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
+            nextPosition();
+        }
+        function addPuzzlePieceWithoutRightToBoard(){
+            if(horizontalPosition != 24 || (verticalPosition == 0 || verticalPosition >= 24))return;
+            addPuzzlePiece('board', true, false, true, true, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
+            nextPosition();
+        }
+        function addPuzzlePieceWithoutBottomToBoard(){
+            if((horizontalPosition == 24 || horizontalPosition == 0) || verticalPosition != 24) return;
+            addPuzzlePiece('board', true, true, false, true, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
+            nextPosition();
+        }
+        function addPuzzlePieceWithoutLeftToBoard(){
+            if(horizontalPosition != 0 || (verticalPosition == 0 || verticalPosition == 24))return;
+            addPuzzlePiece('board', true, true, true, false, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
+            nextPosition();
+        }
+        function addPuzzlePieceWithoutRightAndTopToBoard(){
+            if(horizontalPosition != 24 || verticalPosition != 0)return;
+            addPuzzlePiece('board', false, false, true, true, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
+            nextPosition();
+        }
+        function addPuzzlePieceWithoutLeftAndTopToBoard(){
+            if(horizontalPosition != 0 || verticalPosition != 0)return; 
+            addPuzzlePiece('board', false, true, true, false, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
+            nextPosition();
+        }
+        function addPuzzlePieceWithoutLeftAndBottomToBoard(){
+            if(horizontalPosition != 0 || verticalPosition != 24)return;            
+            addPuzzlePiece('board', true, true, false, false, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
+            nextPosition();
+        }
+        function addPuzzlePieceWithoutRightAndBottomToBoard(){
+            if(horizontalPosition != 24 || verticalPosition != 24)return;
+            addPuzzlePiece('board', true, false, false, true, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
+            nextPosition();
+        }
+
+        function nextPosition(){
+            if(horizontalPosition == 0){
+                horizontalPosition =24;
+                verticalPosition += 6;
+            }else {
+                horizontalPosition -= 6;
+            }
+            if(colorPuzzlePiece == 1){
+                colorPuzzlePiece++;
+            }else{
+                colorPuzzlePiece--;
+            }
+        }
+
+        //4th Iteration oppgave 6
+        // function nextPosition(){
+        //     if(horizontalPosition == 0){
+        //         horizontalPosition =24;
+        //         verticalPosition += 6;
+        //     }else {
+        //         horizontalPosition -= 6;
+        //     }
+        //     if(colorPuzzlePiece == 1){
+        //         colorPuzzlePiece++;
+        //     }else{
+        //         colorPuzzlePiece--;
+        //     }
+        // }
+
+        //3rd iteration oppgave 5
+        // function nextPosition(){
+        //     if(horizontalPosition == 0){
+        //         horizontalPosition =24;
+        //         verticalPosition += 6;
+        //     }else {
+        //         horizontalPosition -= 6;
+        //     }
+        // }
+
+
+        //2nd iteration oppgave 4
+        // function addNormalPuzzlePieceToBoard(){
+        //     addPuzzlePiece('board', true, true, true, true, '', 1, horizontalPosition, 0);
+        //     nextPosition();
+        // }
+
+        // function nextPosition(){
+        //     horizontalPosition -= 6;
+        // }
+
+
+        //1st Iteration oppgave 3
+        // function addNormalPuzzlePieceToBoard(){
+        //     addPuzzlePiece('board', true, true, true, true, '', 1, 24, 0);
+        // }
+
+        document.getElementById('exerciseText').innerHTML = /*HTML*/`            
+                <h2>EASY CLAP</h2>
+               
+            `;
+
+    </script>
+</body>
+
+</html>
