@@ -11,21 +11,98 @@
 
 
     <script>
-
-        let secretText = "TOMNY";
-        let alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","Æ","Ø","Å"];
-        let cypherAlphabet = ["Å","Ø","Æ","Z","Y","X","W","V","U","T","S","R","Q","P","O","N","M","L","K","J","I","H","G","F","E","D","C","B","A"];
+    
+    let cypherCount = 0;
+    let decodeCount = 0;
+    
+        let secretText = "TOMMY";
+        let alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","O","P","Q","R","S","T","U","V","W","X","Y","Z","Æ","Ø","Å"];
+        let cypherAlphabet = ["Å","Ø","Æ","Y","U","O","I","E","A","B","C","D","F","G","H","J","K","L","M","P","Q","R","S","T","V","W","X","Z"];
+        let returnedCypherText = []
+        let returnedDecodedText = []
+        let randomSequence = []
+        show();
+        getRandomCode();
         cypherText();
+        decodeText();
 
-        function cypherText(){
-            splitText = secretText.split("");
-            for(i = 0; i < alphabet.length; i++){
-                if(alphabet[i] == splitText[2]){
-                    splitText[2] = cypherAlphabet[i];
-                    console.log(splitText);
-                }
+
+        //EGEN INPUT FUNKER IKKE ENNÅ
+        function show(){
+            document.getElementById("app").innerHTML = /*HTML*/
+            `
+            <div>CypheredText: ${returnedCypherText.join("")}</div>
+            <div>DecodedText: ${returnedDecodedText.join("")}</div>
+            <div>randomSequence: ${randomSequence.join("")}</div>
+            try it yourself <br>
+            <input type="text" oninput="secretText = this.value">
+            <br>
+            <!-- <button onclick="resetProgramThenCallFunctions()">Try with your text!</button>-->
+            `
+        }
+
+        // function resetProgramThenCallFunctions(){
+        //     cypherCount = 0;
+        //     decodeCount = 0;
+        //     returnedCypherText.splice(0,returnedDecodedText.length);
+        //     cypherText();
+        //     show();
+        // }
+
+        function getRandomCode(){
+            let random;
+            for(i= 0; i < 5; i++){
+                random = Math.floor(Math.random() * 28);
+                randomSequence.push(alphabet[random]);
+                randomSequence.join("");
+                secretText = randomSequence;
             }
+            show();
+        }
 
+        function cypherText(text){
+            splitText = secretText;
+            for(i = 0; i < alphabet.length; i++){
+                if(splitText[cypherCount] == alphabet[i]){
+                    splitText[cypherCount] = cypherAlphabet[i];
+                    returnedCypherText.push(splitText[cypherCount])
+                    cypherCount++;
+                    cypherText();
+                }
+                if(cypherCount == splitText.length)break;
+            }
+            show();
+        }
+
+        //Denne funksjonen blir brukt hvis jeg ikke skal bruke randomsequence
+        //Må da fjerne Getrandomcode og cypherText(text) funksjonene
+        // function cypherText(){
+        //     splitText = secretText.split("");
+        //     for(i = 0; i < alphabet.length; i++){
+        //         if(splitText[cypherCount] == alphabet[i]){
+        //             splitText[cypherCount] = cypherAlphabet[i];
+        //             returnedCypherText.push(splitText[cypherCount])
+        //             cypherCount++;
+        //             console.log(returnedCypherText)
+        //             cypherText();
+        //         }
+        //         if(cypherCount == splitText.length)break;
+        //     }
+        //     console.log(returnedCypherText);
+        //     show();
+        // }
+
+        function decodeText(){
+            for(i = 0; i < cypherAlphabet.length; i++){
+                if(returnedCypherText[decodeCount] == cypherAlphabet[i]){
+                    returnedDecodedText.push(alphabet[i])
+                    decodeCount++;
+                    if(decodeCount-1 == returnedCypherText.length)break;
+                    decodeText();
+                }
+                
+            }
+            show();
         }
 
     </script>
