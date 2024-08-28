@@ -4,16 +4,162 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #grid > div{
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            background-color: azure;
+            border: 1px solid aqua;
+        }
+    </style>
 </head>
 <body>
+    
+    <div id="app">
+
+    </div>
 
     <script>
+    //model
+    let numbers = [null, 7, 5, 1, 3, 4, 8, 6, 2];
 
-    let numbers = [1, 2, 5, 7, null, 9, 3, 4, 8, 6];
+    //controller
+    //Veldig "rough" løsning
+    function changePosition(id){
+            if(id == 0){
+                if(document.getElementById('sq1').innerHTML == ''){
+                numbers[1] = numbers[0];
+                numbers[0] = null;
+                }
+                else if(document.getElementById('sq3').innerHTML == ''){
+                    numbers[3] = numbers[0];
+                    numbers[0] = null;
+                }
+            }
+            if(id == 1){
+                if(document.getElementById('sq0').innerHTML == ''){
+                numbers[0] = numbers[1];
+                numbers[1] = null;
+                }
+                else if(document.getElementById('sq2').innerHTML == ''){
+                    numbers[2] = numbers[1];
+                    numbers[1] = null;
+                }
+                else if(document.getElementById('sq4').innerHTML == ''){
+                    numbers[4] = numbers[1];
+                    numbers[1] = null;
+                }
+            }
+            if(id == 2){
+                if(document.getElementById('sq1').innerHTML == ''){
+                numbers[1] = numbers[2];
+                numbers[2] = null;
+                }
+                else if(document.getElementById('sq5').innerHTML == ''){
+                    numbers[5] = numbers[2];
+                    numbers[2] = null;
+                }
+            }
+            if(id == 3){
+                if(document.getElementById('sq0').innerHTML == ''){
+                numbers[0] = numbers[3];
+                numbers[3] = null;
+                }
+                else if(document.getElementById('sq4').innerHTML == ''){
+                    numbers[4] = numbers[3];
+                    numbers[3] = null;
+                }
+                else if(document.getElementById('sq6').innerHTML == ''){
+                    numbers[6] = numbers[3];
+                    numbers[3] = null;
+                }
+            }
+            if(id == 4){
+                if(document.getElementById('sq1').innerHTML == ''){
+                numbers[1] = numbers[4];
+                numbers[4] = null;
+                }
+                else if(document.getElementById('sq3').innerHTML == ''){
+                    numbers[3] = numbers[4];
+                    numbers[4] = null;
+                }
+                if(document.getElementById('sq5').innerHTML == ''){
+                numbers[5] = numbers[4];
+                numbers[4] = null;
+                }
+                else if(document.getElementById('sq7').innerHTML == ''){
+                    numbers[7] = numbers[4];
+                    numbers[4] = null;
+                }
+            }
+            if(id == 5){
+                if(document.getElementById('sq2').innerHTML == ''){
+                numbers[2] = numbers[5];
+                numbers[5] = null;
+                }
+                else if(document.getElementById('sq4').innerHTML == ''){
+                    numbers[4] = numbers[5];
+                    numbers[5] = null;
+                }
+                else if(document.getElementById('sq8').innerHTML == ''){
+                    numbers[8] = numbers[5];
+                    numbers[5] = null;
+                }
+            }
+            if(id == 6){
+                if(document.getElementById('sq3').innerHTML == ''){
+                numbers[3] = numbers[6];
+                numbers[6] = null;
+                }
+                else if(document.getElementById('sq7').innerHTML == ''){
+                    numbers[7] = numbers[6];
+                    numbers[6] = null;
+                }
+            }
+            if(id == 7){
+                if(document.getElementById('sq4').innerHTML == ''){
+                numbers[4] = numbers[7];
+                numbers[7] = null;
+                }
+                else if(document.getElementById('sq6').innerHTML == ''){
+                    numbers[6] = numbers[7];
+                    numbers[7] = null;
+                }
+                else if(document.getElementById('sq8').innerHTML == ''){
+                    numbers[8] = numbers[7];
+                    numbers[7] = null;
+                }
+            }
+            if(id == 8){
+                if(document.getElementById('sq5').innerHTML == ''){
+                numbers[5] = numbers[8];
+                numbers[8] = null;
+                }
+                else if(document.getElementById('sq7').innerHTML == ''){
+                    numbers[7] = numbers[8];
+                    numbers[8] = null;
+                }
+            }
+            show();
+        }
 
-    
-
-
+    //view
+    show();
+    function show(){
+        let tempString = ``;
+        for(i = 0; i < numbers.length; i++){
+        tempString += 
+        `
+        <div id='sq${i}' onclick="changePosition(${i})">${numbers[i] == null ? '' : numbers[i]}</div> 
+        `
+    }
+        document.getElementById("app").innerHTML = `
+        <div id="grid" style="display:grid; grid-template-columns:repeat(3,150px); grid-template-rows:repeat(3,150px); width:450px; height:450px; border:2px solid aqua">
+            ${tempString}
+        </div>
+    `
+    }
     </script>
     
 </body>

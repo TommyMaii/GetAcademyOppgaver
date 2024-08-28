@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app"></div>
+    
+    <script>
+
+        let userInput = `Lim inn din tekst så teller jeg ordene for deg!`;
+        let wordCount;
+        show();
+        countWords();
+
+        function countWords(){
+            let input = document.getElementById("inputtedText").value;
+            words = input.replace(/\d/gi, "").split(" ");
+            userInput = input;
+            for(i = 0; i < inputArray.length; i++){
+                if(inputArray[i] == "") {inputArray.splice(i,1000)}
+            }
+            wordCount = inputArray.length;
+            show();
+        }
+
+        //Woops leste ikke helt oppgaveteksten =)
+        // function countWords(){
+        //     let input = document.getElementById("inputtedText").value;
+        //     inputArray = input.replace(/\d/gi, "").split(" ");
+        //     userInput = input;
+        //     console.log(inputArray);
+        //     for(i = 0; i < inputArray.length; i++){
+        //         if(inputArray[i] == "") {inputArray.splice(i,1000)}
+        //     }
+        //     wordCount = inputArray.length;
+        //     show();
+        // }
+
+        function show(){
+            document.getElementById("app").innerHTML = /*HTML*/
+            `
+            <textarea id="inputtedText" style="width:750px; height:300px">${userInput}</textarea>
+            <button onclick="countWords()">Count words</button>
+            <h3>Teksten din har: ${wordCount} ord!</h3>
+            `
+        }
+
+    </script>
+
+</body>
+</html>

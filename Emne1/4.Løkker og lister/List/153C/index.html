@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app"></div>
+
+
+    <script>
+
+        let secretText = "TOMNY";
+        let alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","Æ","Ø","Å"];
+        let cypherAlphabet = ["Å","Ø","Æ","Z","Y","X","W","V","U","T","S","R","Q","P","O","N","M","L","K","J","I","H","G","F","E","D","C","B","A"];
+        cypherText();
+
+        function cypherText(){
+            splitText = secretText.split("");
+            for(i = 0; i < alphabet.length; i++){
+                if(alphabet[i] == splitText[2]){
+                    splitText[2] = cypherAlphabet[i];
+                    console.log(splitText);
+                }
+            }
+
+        }
+
+    </script>
+</body>
+</html>
