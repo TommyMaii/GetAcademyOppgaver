@@ -19,21 +19,22 @@
         let verticalPosition = 0;
         let horizontalPosition = 24;
         let colorPuzzlePiece = 1;
+        let column1 = 0;
+        let column5 = 24;
+        let row1 = 0;
+        let row5 = 24;
 
-        // addPuzzlePiece('board', false, false, true, true, '', 1, 24, 0);
-        // addPuzzlePiece('board', false, true, true, true, '', 2, 18, 0);
-        // addPuzzlePiece('board', false, true, true, true, '', 1, 12, 0);
-        // addPuzzlePiece('board', true, false, true, true, '', 2, 24, 6);
+        //Sannhets verdier: første: øverst, andre: høyre, tredje: bunn, fjerde: venstre
 
-        addPuzzlePiece('buttons', true, true, true, true, 'addNormalPuzzlePieceToBoard()', 1);
-        addPuzzlePiece('buttons', false, true, true, true, 'addPuzzlePieceWithoutTopToBoard()', 2);
-        addPuzzlePiece('buttons', true, false, true, true, 'addPuzzlePieceWithoutRightToBoard()', 1);
-        addPuzzlePiece('buttons', true, true, false, true, 'addPuzzlePieceWithoutBottomToBoard()', 2);
-        addPuzzlePiece('buttons', true, true, true, false, 'addPuzzlePieceWithoutLeftToBoard()', 1);
-        addPuzzlePiece('buttons', false, false, true, true, 'addPuzzlePieceWithoutRightAndTopToBoard()', 2);
-        addPuzzlePiece('buttons', false, true, true, false, 'addPuzzlePieceWithoutLeftAndTopToBoard()', 1);
-        addPuzzlePiece('buttons', true, true, false, false, 'addPuzzlePieceWithoutLeftAndBottomToBoard()', 2);
-        addPuzzlePiece('buttons', true, false, false, true, 'addPuzzlePieceWithoutRightAndBottomToBoard()', 1);
+        addPuzzlePiece('buttons', true, true, true, true, 'addPuzzlePieceToBoard(middlePiece(), true,true,true,true)', 1);
+        addPuzzlePiece('buttons', false, true, true, true, 'addPuzzlePieceToBoard(topPiece(), false, true, true, true)', 2);
+        addPuzzlePiece('buttons', true, false, true, true, 'addPuzzlePieceToBoard(rightPiece(), true, false, true, true)', 1);
+        addPuzzlePiece('buttons', true, true, false, true, 'addPuzzlePieceToBoard(bottomPiece(), true, true, false, true)', 2);
+        addPuzzlePiece('buttons', true, true, true, false, 'addPuzzlePieceToBoard(leftPiece(), true, true, true, false)', 1);
+        addPuzzlePiece('buttons', false, false, true, true, 'addPuzzlePieceToBoard(topRightPiece(), false, false, true, true)', 2);
+        addPuzzlePiece('buttons', false, true, true, false, 'addPuzzlePieceToBoard(topLeftPiece(), false, true, true, false)', 1);
+        addPuzzlePiece('buttons', true, true, false, false, 'addPuzzlePieceToBoard(bottomLeftPiece(), true, true, false, false)', 2);
+        addPuzzlePiece('buttons', true, false, false, true, 'addPuzzlePieceToBoard(bottomRightPiece(), true, false, false, true)', 1);
 
         //Funksjonen "lager" brikken basert på paremeterene.
         function addPuzzlePiece(toId, hasTop, hasRight, hasBottom, hasLeft, onclick, color, leftPosition, topPosition) {
@@ -52,64 +53,47 @@
             `;
         }
 
-        //HORIZONTALPOSITION = 24 = Right Side
-        //HORIZONTALPOSITION = 0 = Left Side
-        //VERTICALPOSITION = 0 = Top Side
-        //VERTICALPOSITION = 24 = Bottom Side
-        // Vi assigner funksjonene under, til riktig puslebit i addpuzzlepiece.
-        function addNormalPuzzlePieceToBoard(){
-            if((horizontalPosition == 24 || horizontalPosition == 0) || (verticalPosition == 0 || verticalPosition >= 24))return;
-            addPuzzlePiece('board', true, true, true, true, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
+        function addPuzzlePieceToBoard(func, top, right, bottom, left){
+            if(func == false){
+            addPuzzlePiece('board', top, right, bottom, left, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
             nextPosition();
+            }
+        }
+        
+
+        //Funksjoner som tar for seg sannhetsverdiene for puslebitene:
+        function topPiece(){
+            return((horizontalPosition == column5 || horizontalPosition == column1) || verticalPosition != row1);
+        }
+        function topLeftPiece(){
+            return(horizontalPosition != column1 || verticalPosition != row1);
+        }
+        function topRightPiece(){
+            return((horizontalPosition != column5 || verticalPosition != row1));
+        }
+        function rightPiece(){
+            return(horizontalPosition != column5 || (verticalPosition == row1 || verticalPosition >= row5));
+        }
+        function middlePiece(){
+            return(horizontalPosition == column5 || horizontalPosition == column1) || (verticalPosition == row1 || verticalPosition >= row5);
+        }
+        function leftPiece(){
+            return(horizontalPosition != column1 || (verticalPosition == row1 || verticalPosition == row5));
+        }
+        function bottomRightPiece(){
+            return(horizontalPosition != column5 || verticalPosition != row5);
+        }
+        function bottomLeftPiece(){
+            return(horizontalPosition != column1 || verticalPosition != row5);
+        }
+        function bottomPiece(){
+            return((horizontalPosition == column5 || horizontalPosition == column1) || verticalPosition != row5);
         }
 
-        function addPuzzlePieceWithoutTopToBoard(){
-            if((horizontalPosition == 24 || horizontalPosition == 0) || verticalPosition != 0)return;
-            addPuzzlePiece('board', false, true, true, true, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
-            nextPosition();
-        }
-        function addPuzzlePieceWithoutRightToBoard(){
-            if(horizontalPosition != 24 || (verticalPosition == 0 || verticalPosition >= 24))return;
-            addPuzzlePiece('board', true, false, true, true, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
-            nextPosition();
-        }
-        function addPuzzlePieceWithoutBottomToBoard(){
-            if((horizontalPosition == 24 || horizontalPosition == 0) || verticalPosition != 24) return;
-            addPuzzlePiece('board', true, true, false, true, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
-            nextPosition();
-        }
-        function addPuzzlePieceWithoutLeftToBoard(){
-            if(horizontalPosition != 0 || (verticalPosition == 0 || verticalPosition == 24))return;
-            addPuzzlePiece('board', true, true, true, false, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
-            nextPosition();
-        }
-        function addPuzzlePieceWithoutRightAndTopToBoard(){
-            if(horizontalPosition != 24 || verticalPosition != 0)return;
-            addPuzzlePiece('board', false, false, true, true, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
-            nextPosition();
-        }
-        function addPuzzlePieceWithoutLeftAndTopToBoard(){
-            if(horizontalPosition != 0 || verticalPosition != 0)return; 
-            addPuzzlePiece('board', false, true, true, false, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
-            nextPosition();
-        }
-        function addPuzzlePieceWithoutLeftAndBottomToBoard(){
-            if(horizontalPosition != 0 || verticalPosition != 24)return;            
-            addPuzzlePiece('board', true, true, false, false, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
-            nextPosition();
-        }
-        function addPuzzlePieceWithoutRightAndBottomToBoard(){
-            if(horizontalPosition != 24 || verticalPosition != 24)return;
-            addPuzzlePiece('board', true, false, false, true, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
-            nextPosition();
-        }
 
-        //Denne funksjonen flytter den neste brikken generert til venstre.
-        //Hvis horizontal posisjon = 0, som betyr venstre side. Leger vi da 6 til horizontal posisjon
-        //Som vil da sette neste brikke på neste linje.
         function nextPosition(){
-            if(horizontalPosition == 0){
-                horizontalPosition =24;
+            if(horizontalPosition == column1){
+                horizontalPosition = column5;
                 verticalPosition += 6;
             }else {
                 horizontalPosition -= 6;
@@ -120,52 +104,10 @@
                 colorPuzzlePiece--;
             }
         }
-
-        //4th Iteration oppgave 6
-        // function nextPosition(){
-        //     if(horizontalPosition == 0){
-        //         horizontalPosition =24;
-        //         verticalPosition += 6;
-        //     }else {
-        //         horizontalPosition -= 6;
-        //     }
-        //     if(colorPuzzlePiece == 1){
-        //         colorPuzzlePiece++;
-        //     }else{
-        //         colorPuzzlePiece--;
-        //     }
-        // }
-
-        //3rd iteration oppgave 5
-        // function nextPosition(){
-        //     if(horizontalPosition == 0){
-        //         horizontalPosition =24;
-        //         verticalPosition += 6;
-        //     }else {
-        //         horizontalPosition -= 6;
-        //     }
-        // }
-
-
-        //2nd iteration oppgave 4
-        // function addNormalPuzzlePieceToBoard(){
-        //     addPuzzlePiece('board', true, true, true, true, '', 1, horizontalPosition, 0);
-        //     nextPosition();
-        // }
-
-        // function nextPosition(){
-        //     horizontalPosition -= 6;
-        // }
-
-
-        //1st Iteration oppgave 3
-        // function addNormalPuzzlePieceToBoard(){
-        //     addPuzzlePiece('board', true, true, true, true, '', 1, 24, 0);
-        // }
+     
 
         document.getElementById('exerciseText').innerHTML = /*HTML*/`            
-                <h2>EASY CLAP</h2>
-               
+                <h2>EASY CLAP X2</h2>
             `;
 
     </script>
