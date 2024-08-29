@@ -19,10 +19,10 @@
         let verticalPosition = 0;
         let horizontalPosition = 24;
         let colorPuzzlePiece = 1;
-        let column1 = 0;
-        let column5 = 24;
-        let row1 = 0;
-        let row5 = 24;
+        let firstColumn = 0;
+        let lastColumn = 24;
+        let firstRow = 0;
+        let lastRow = 24;
 
         //Sannhets verdier: første: øverst, andre: høyre, tredje: bunn, fjerde: venstre
         addPuzzlePiece('buttons', true, true, true, true, 'addPuzzlePieceToBoard(true,true,true,true)', 1);
@@ -56,15 +56,18 @@
             //
             function addPuzzlePieceToBoard(top, right, bottom, left) {
 
-                if(verticalPosition == row1) {if(top) return;}
+                if(verticalPosition == firstRow) {if(top) return;}
                 else {if(!top) return;}
-                if(verticalPosition == row5) {if(bottom) return;}
+
+                if(verticalPosition == lastRow) {if(bottom) return;}
                 else {if(!bottom) return;}
-                if(horizontalPosition == column5) {if(right) return;}
+
+                if(horizontalPosition == lastColumn) {if(right) return;}
                 else {if(!right) return;}
-                if(horizontalPosition == column1) {if(left) return;}
+                
+                if(horizontalPosition == firstColumn) {if(left) return;}
                 else {if(!left) return;}
-                if(verticalPosition > row5) return;
+                if(verticalPosition > lastRow) return;
                 
                 addPuzzlePiece('board', top, right, bottom, left, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
                 nextPosition();
@@ -72,8 +75,8 @@
         
 
             function nextPosition(){
-                if(horizontalPosition == column1){
-                    horizontalPosition = column5;
+                if(horizontalPosition == firstColumn){
+                    horizontalPosition = lastColumn;
                     verticalPosition += 6;
                 }else {
                     horizontalPosition -= 6;
