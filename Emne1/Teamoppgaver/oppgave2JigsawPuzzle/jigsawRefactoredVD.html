@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div style="display: grid; grid-template-columns: 32em auto; grid-template-rows: auto 8em; height: 95vh; grid-template-areas: 'board text' ' buttons buttons'">
+        <div id="board" style="grid-area: board;"></div>
+        <div id="exerciseText" style="overflow-y: scroll;height: 32em;grid-area: text;"></div>
+        <div id="buttons" style="background-color: lightblue;grid-area: buttons;"></div>
+    </div>
+    <script>
+
+        let verticalPosition = 0;
+        let horizontalPosition = 24;
+        let colorPuzzlePiece = 1;
+        let firstColumn = 0;
+        let lastColumn = 24;
+        let firstRow = 0;
+        let lastRow = 24;
+
+        //Sannhets verdier: første: øverst, andre: høyre, tredje: bunn, fjerde: venstre
+        addPuzzlePiece('buttons', true, true, true, true, 'addPuzzlePieceToBoard(true,true,true,true)', 1);
+        addPuzzlePiece('buttons', false, true, true, true, 'addPuzzlePieceToBoard(false, true, true, true)', 2);
+        addPuzzlePiece('buttons', true, false, true, true, 'addPuzzlePieceToBoard(true, false, true, true)', 1);
+        addPuzzlePiece('buttons', true, true, false, true, 'addPuzzlePieceToBoard(true, true, false, true)', 2);
+        addPuzzlePiece('buttons', true, true, true, false, 'addPuzzlePieceToBoard(true, true, true, false)', 1);
+        addPuzzlePiece('buttons', false, false, true, true, 'addPuzzlePieceToBoard(false, false, true, true)', 2);
+        addPuzzlePiece('buttons', false, true, true, false, 'addPuzzlePieceToBoard(false, true, true, false)', 1);
+        addPuzzlePiece('buttons', true, true, false, false, 'addPuzzlePieceToBoard(true, true, false, false)', 2);
+        addPuzzlePiece('buttons', true, false, false, true, 'addPuzzlePieceToBoard(true, false, false, true)', 1);
+
+        //Funksjonen "lager" brikken basert på paremeterene.
+        function addPuzzlePiece(toId, hasTop, hasRight, hasBottom, hasLeft, onclick, color, leftPosition, topPosition) {
+            let style = '';
+            if (leftPosition !== undefined) {
+                style = `left: ${leftPosition + 0.5}em; top: ${topPosition + 0.5}em`;
+            }
+
+            document.getElementById(toId).innerHTML += /*HTML*/`
+                <div class="jigsaw${color}" onclick="${onclick}" style="${style}">
+                    ${hasTop ? `<span class="t"></span>` : ''}
+                    ${hasRight ? `<span class="r"></span>` : ''}
+                    ${hasBottom ? `<span class="b"></span>` : ''}
+                    ${hasLeft ? `<span class="l"></span>` : ''}
+                </div>            
+                `;
+            }
+            
+            //Første og andre IF sjekker vertikal posisjoner. Tredje og Fjerde IF sjekker horisontal posisjoner.
+            //
+            function addPuzzlePieceToBoard(top, right, bottom, left) {
+                if(!canAddPiece(top, right, bottom, left)) return;
+                addPuzzlePiece('board', top, right, bottom, left, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
+                nextPosition();
+            }
+
+            function canAddPiece(top, right, bottom, left){
+                if(isPieceOutsideBoard()) return false;
+                if(isPieceFirstRowAndHasTop(top)) return false;
+                if(isPieceLastRowAndHasBottom(bottom)) return false;
+                if(isPieceFirstColumnAndHasLeft(left)) return false;
+                if(isPieceLastColumnAndHasRight(right)) return false;
+                return true;
+
+            }
+            
+            function isPieceOutsideBoard(){
+                return verticalPosition > lastRow;
+            }
+
+            function isPieceFirstRowAndHasTop(top){
+                if(top){return verticalPosition == firstRow};
+                return false;
+            }
+
+            function isPieceLastRowAndHasBottom(bottom){
+                if(bottom){return verticalPosition == lastRow};
+                return false;
+            }
+          
+            function isPieceFirstColumnAndHasLeft(left){
+                if(left){return horizontalPosition == firstColumn};
+                return false;
+            }
+
+            function isPieceLastColumnAndHasRight(right){
+                if(right){return horizontalPosition == lastColumn};
+                return false;
+            }
+
+
+            function nextPosition(){
+                if(horizontalPosition == firstColumn){
+                    horizontalPosition = lastColumn;
+                    verticalPosition += 6;
+                }else {
+                    horizontalPosition -= 6;
+                }
+                if(colorPuzzlePiece == 1){
+                    colorPuzzlePiece++;
+                }else{
+                    colorPuzzlePiece--;
+                }
+            }
+
+        document.getElementById('exerciseText').innerHTML = /*HTML*/`            
+                <h2>EASY CLAP X3</h2>
+            `;
+
+    </script>
+</body>
+
+</html>
