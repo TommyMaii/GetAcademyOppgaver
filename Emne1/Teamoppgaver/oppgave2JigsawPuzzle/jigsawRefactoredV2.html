@@ -19,22 +19,22 @@
         let verticalPosition = 0;
         let horizontalPosition = 24;
         let colorPuzzlePiece = 1;
-        let column1 = 0;
-        let column5 = 24;
-        let row1 = 0;
-        let row5 = 24;
+        let firstColumn = 0;
+        let lastColumn = 24;
+        let firstRow = 0;
+        let lastRow = 24;
 
         //Sannhets verdier: første: øverst, andre: høyre, tredje: bunn, fjerde: venstre
 
-        addPuzzlePiece('buttons', true, true, true, true, 'addPuzzlePieceToBoard(middlePiece(), true,true,true,true)', 1);
-        addPuzzlePiece('buttons', false, true, true, true, 'addPuzzlePieceToBoard(topBottomPieces(row1), false, true, true, true)', 2);
-        addPuzzlePiece('buttons', true, false, true, true, 'addPuzzlePieceToBoard(sidePieces(column5), true, false, true, true)', 1);
-        addPuzzlePiece('buttons', true, true, false, true, 'addPuzzlePieceToBoard(topBottomPieces(row5), true, true, false, true)', 2);
-        addPuzzlePiece('buttons', true, true, true, false, 'addPuzzlePieceToBoard(sidePieces(column1), true, true, true, false)', 1);
-        addPuzzlePiece('buttons', false, false, true, true, 'addPuzzlePieceToBoard(cornerPieces(column5, row1), false, false, true, true)', 2);
-        addPuzzlePiece('buttons', false, true, true, false, 'addPuzzlePieceToBoard(cornerPieces(column1, row1), false, true, true, false)', 1);
-        addPuzzlePiece('buttons', true, true, false, false, 'addPuzzlePieceToBoard(cornerPieces(column1, row5), true, true, false, false)', 2);
-        addPuzzlePiece('buttons', true, false, false, true, 'addPuzzlePieceToBoard(cornerPieces(column5, row5), true, false, false, true)', 1);
+        addPuzzlePiece('buttons', true, true, true, true, 'addPuzzlePieceToBoard(isMiddlePiece(), true,true,true,true)', 1);
+        addPuzzlePiece('buttons', false, true, true, true, 'addPuzzlePieceToBoard(isTopBottomPieces(firstRow), false, true, true, true)', 2);
+        addPuzzlePiece('buttons', true, false, true, true, 'addPuzzlePieceToBoard(sidePieces(lastColumn), true, false, true, true)', 1);
+        addPuzzlePiece('buttons', true, true, false, true, 'addPuzzlePieceToBoard(isTopBottomPieces(lastRow), true, true, false, true)', 2);
+        addPuzzlePiece('buttons', true, true, true, false, 'addPuzzlePieceToBoard(sidePieces(firstColumn), true, true, true, false)', 1);
+        addPuzzlePiece('buttons', false, false, true, true, 'addPuzzlePieceToBoard(cornerPieces(lastColumn, firstRow), false, false, true, true)', 2);
+        addPuzzlePiece('buttons', false, true, true, false, 'addPuzzlePieceToBoard(cornerPieces(firstColumn, firstRow), false, true, true, false)', 1);
+        addPuzzlePiece('buttons', true, true, false, false, 'addPuzzlePieceToBoard(cornerPieces(firstColumn, lastRow), true, true, false, false)', 2);
+        addPuzzlePiece('buttons', true, false, false, true, 'addPuzzlePieceToBoard(cornerPieces(lastColumn, lastRow), true, false, false, true)', 1);
 
         //Funksjonen "lager" brikken basert på paremeterene.
         function addPuzzlePiece(toId, hasTop, hasRight, hasBottom, hasLeft, onclick, color, leftPosition, topPosition) {
@@ -60,27 +60,25 @@
             }
         }
     
-
-
-        function topBottomPieces(firstValue){
-            return((horizontalPosition == column5 || horizontalPosition == column1) || verticalPosition != firstValue);
+        function isTopBottomPieces(rowValue){
+            return((horizontalPosition == lastColumn || horizontalPosition == firstColumn) || verticalPosition != rowValue);
         }
 
-        function sidePieces(firstValue){
-            return(horizontalPosition != firstValue || (verticalPosition == row1 || verticalPosition >= row5));
+        function isSidePieces(columnValue){
+            return(horizontalPosition != columnValue || (verticalPosition == firstColumn || verticalPosition >= lastRow));
         }
 
-        function cornerPieces(firstValue, secondValue){
-            return(horizontalPosition != firstValue || verticalPosition != secondValue);
+        function isCornerPieces(columnValue, rowValue){
+            return(horizontalPosition != columnValue || verticalPosition != rowValue);
         }
 
-        function middlePiece(){
-            return(horizontalPosition == column5 || horizontalPosition == column1) || (verticalPosition == row1 || verticalPosition >= row5);
+        function isMiddlePiece(){
+            return(horizontalPosition == lastColumn || horizontalPosition == firstColumn) || (verticalPosition == firstColumn || verticalPosition >= lastRow);
         }
 
         function nextPosition(){
-            if(horizontalPosition == column1){
-                horizontalPosition = column5;
+            if(horizontalPosition == firstColumn){
+                horizontalPosition = lastColumn;
                 verticalPosition += 6;
             }else {
                 horizontalPosition -= 6;

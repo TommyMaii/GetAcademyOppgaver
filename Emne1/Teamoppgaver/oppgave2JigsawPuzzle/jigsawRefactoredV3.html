@@ -52,8 +52,9 @@
                 `;
             }
             
-            //Første og andre IF sjekker vertikal posisjoner. Tredje og Fjerde IF sjekker horisontal posisjoner.
-            //
+            // Avhengig av argumentene så utføres eller brytes funksjonen. Argumentene er kantene til spillbrettet og selve brikken.
+            // Første og andre IF sjekker vertikal posisjoner. Tredje og Fjerde IF sjekker horisontal posisjoner.
+            // Else funksjonene stopper funksjonen basert på argumentene.
             function addPuzzlePieceToBoard(top, right, bottom, left) {
 
                 if(verticalPosition == firstRow) {if(top) return;}
@@ -64,9 +65,10 @@
 
                 if(horizontalPosition == lastColumn) {if(right) return;}
                 else {if(!right) return;}
-                
+
                 if(horizontalPosition == firstColumn) {if(left) return;}
                 else {if(!left) return;}
+
                 if(verticalPosition > lastRow) return;
                 
                 addPuzzlePiece('board', top, right, bottom, left, '', colorPuzzlePiece, horizontalPosition, verticalPosition);

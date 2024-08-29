@@ -59,7 +59,8 @@
                 addPuzzlePiece('board', top, right, bottom, left, '', colorPuzzlePiece, horizontalPosition, verticalPosition);
                 nextPosition();
             }
-
+            
+            // If setninger sjekker om en brikke kan legges
             function canAddPiece(top, right, bottom, left){
                 if(isPieceOutsideBoard()) return false;
                 if(isPieceFirstRowAndHasTop(top)) return false;
@@ -67,9 +68,8 @@
                 if(isPieceFirstColumnAndHasLeft(left)) return false;
                 if(isPieceLastColumnAndHasRight(right)) return false;
                 return true;
-
             }
-            
+
             function isPieceOutsideBoard(){
                 return verticalPosition > lastRow;
             }
