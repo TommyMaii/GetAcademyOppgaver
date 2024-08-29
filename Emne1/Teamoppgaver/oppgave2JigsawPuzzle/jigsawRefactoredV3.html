@@ -52,12 +52,10 @@
                 `;
             }
             
-            //Første if sjekker om vertikal posisjonen er første kolonne 
-            //Hvis det er første kolonne så sjekker den da om puslebiten har en top, hvis den har det så stopper funksjonen
-            //Deretter sier else funksjonen at hvis puslebiten ikke har top på alle andre rader så kan puslebiten IKKE bli plassert.
-            //Denne sammenligningen skjer da også for alle sidene.
+            //Første og andre IF sjekker vertikal posisjoner. Tredje og Fjerde IF sjekker horisontal posisjoner.
+            //
+            function addPuzzlePieceToBoard(top, right, bottom, left) {
 
-            function addPuzzlePieceToBoard(top, right, bottom, left){
                 if(verticalPosition == row1) {if(top) return;}
                 else {if(!top) return;}
                 if(verticalPosition == row5) {if(bottom) return;}
