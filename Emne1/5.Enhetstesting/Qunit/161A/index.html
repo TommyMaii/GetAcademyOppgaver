@@ -35,6 +35,17 @@
             const expected = 'Terje';
             assert.equal(actual, expected);
         });
+
+        // QUnit.test("fix - ' email '", function (assert) {
+        //     const actual = fixText('tommy@gmail.com');
+        //     const expected = true;
+        //     assert.equal(actual, expected);
+        // });
+        QUnit.test("fix - ' email '", function (assert) {
+            const actual = fixText('tommy@gmail.com');
+            const expected = 'tommy.@.gmail.com';
+            assert.equal(actual, expected);
+        });
     </script>
 </body>
 </html>
