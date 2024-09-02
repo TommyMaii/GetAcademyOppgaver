@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .game-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+
+        .tower-container {
+            position: relative;
+        }
+
+        .tower {
+            width: 100px;
+            height: 120px;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            border-bottom: 8px solid darkred;
+        }
+
+        .tower-container::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 120px;
+            z-index: -10;
+            background-color: darkred;
+        }
+
+        .disk {
+            width: 20px;
+            height: 20px;
+            background-color: blue;
+            border: 4px solid gray;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+
+    <script>
+        // model
+        //   hvor er diskene, 0 = venstre tårn, 1 = midten, 2 = høyre
+        //   alle starter til venstre
+        let smallDiskTowerIndex = 0;
+        let mediumDiskTowerIndex = 0;
+        let largeDiskTowerIndex = 0;
+
+        let towerOneSmallestDiskSize = 0;
+        let towerTwoSmallestDiskSize = 0;
+        let towerThreeSmallestDiskSize = 0;
+
+        let largeDiskRightButton = true;
+        let largeDiskMiddleButton = true;
+        let largeDiskLeftButton = true;
+
+        let mediumDiskRightButton = true;
+        let mediumDiskMiddleButton = true;
+        let mediumDiskLeftButton = true;
+        
+        let smallDiskRightButton = true;
+        let smallDiskMiddleButton = true;
+        let smallDiskLeftButton = true;
+
+        let smallDisk = '<div class="disk" style="width: 30px"></div>' 
+        let mediumDisk = '<div class="disk" style="width: 50px"></div>' 
+        let largeDisk = '<div class="disk" style="width: 70px"></div>' 
+
+        let hasWon = false;
+
+        // view 
+        updateView();
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+                <div class="game-container">
+                    <div class="tower-container">
+                        <div class="tower">
+                            ${checkTowerIndex(0)}
+                        </div>
+                    </div>
+                    <div class="tower-container">
+                        <div class="tower">
+                            ${checkTowerIndex(1)}
+                        </div>
+                    </div>
+                    <div class="tower-container">
+                        <div class="tower">
+                            ${checkTowerIndex(2)}
+                        </div>
+                    </div>
+                </div>
+                Flytt liten disk til 
+                ${smallDiskLeftButton ? '<button onclick="moveSmallDisk(0)">venstre tårn</button>' : ''}
+                ${smallDiskMiddleButton ? '<button onclick="moveSmallDisk(1)">midtre tårn</button>' : ''}
+                ${smallDiskRightButton ? '<button onclick="moveSmallDisk(2)">høyre tårn</button>' : ''}
+                <br/>
+                Flytt medium disk
+                ${mediumDiskLeftButton ? '<button onclick="moveMediumDisk(0)">venstre tårn</button>' : ''}
+                ${mediumDiskMiddleButton ? '<button onclick="moveMediumDisk(1)">midtre tårn</button>' : ''}
+                ${mediumDiskRightButton ? '<button onclick="moveMediumDisk(2)">høyre tårn</button>' : ''}
+                <br/>
+                Flytt stor disk
+                ${largeDiskLeftButton ? '<button onclick="moveLargeDisk(0)">venstre tårn</button>' : ''}
+                ${largeDiskMiddleButton ? '<button onclick="moveLargeDisk(1)">midtre tårn</button>' : ''}
+                ${largeDiskRightButton ? '<button onclick="moveLargeDisk(2)">høyre tårn</button>' : ''}
+                <br/>
+                <div>${hasWon ? `Du Vant!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! <button onclick="resetGame()">Spill på nytt</button>` : ''}</div>
+            `;
+        }
+
+
+
+        // controller
+        function checkTowerIndex(towerIndex){
+            towerHTML = '';
+            if(towerIndex == 0){
+            }
+            if(largeDiskTowerIndex == towerIndex){
+                towerHTML += largeDisk;
+            }
+            if(mediumDiskTowerIndex == towerIndex){
+                towerHTML += mediumDisk;
+                
+            }
+            if(smallDiskTowerIndex == towerIndex){
+                towerHTML += smallDisk;
+            }  
+            if(smallDiskTowerIndex == 2 && mediumDiskTowerIndex == 2 && largeDiskTowerIndex == 2){
+                hasWon = true;
+            }
+            return towerHTML;
+        }
+
+        buttonReset();
+        function buttonReset(){
+            if(smallDiskTowerIndex == 0){
+                largeDiskLeftButton = false;
+                mediumDiskLeftButton = false;
+                smallDiskLeftButton = false;
+            }else{
+                largeDiskLeftButton = true;
+                mediumDiskLeftButton = true;
+                smallDiskLeftButton = true;
+            }
+            largeDiskRightButton = true;
+            largeDiskMiddleButton = true;
+            
+            mediumDiskRightButton = true;
+            mediumDiskMiddleButton = true;
+            
+            smallDiskRightButton = true;
+            smallDiskMiddleButton = true;
+            updateView();
+            
+        }
+
+        function resetGame(){
+            location.reload();
+        }
+
+
+        function moveSmallDisk(toTowerIndex) {
+            buttonReset();
+            smallDiskTowerIndex = toTowerIndex;
+            if(toTowerIndex == 2){
+                largeDiskRightButton = false;
+                mediumDiskRightButton = false;
+                smallDiskRightButton = false;
+            }   
+            if(toTowerIndex == 1){
+                largeDiskMiddletButton = false;
+                mediumDiskMiddleButton = false;
+                smallDiskMiddleButton = false;
+            }   
+            if(toTowerIndex == 0){
+                largeDiskLeftButton = false;
+                mediumDiskLeftButton = false;
+                smallDiskLeftButton = false;
+            }   
+            updateView();
+        }
+
+        function moveMediumDisk(toTowerIndex) {
+            buttonReset();
+            if(smallDiskTowerIndex == toTowerIndex){ 
+                return false;
+            }
+            mediumDiskTowerIndex = toTowerIndex;   
+            
+            if(toTowerIndex == 2){
+                largeDiskRightButton = false;
+                mediumDiskRightButton = false;
+            }   
+            if(toTowerIndex == 1){
+                largeDiskMiddleButton = false;
+                mediumDiskMiddleButton = false;
+            }   
+            if(toTowerIndex == 0){
+                largeDiskLeftButton = false;
+                mediumDiskLeftButton = false;
+            } 
+            updateView();
+            return true;
+        }
+
+        function moveLargeDisk(toTowerIndex) {
+            buttonReset();
+            if((smallDiskTowerIndex == toTowerIndex) || mediumDiskTowerIndex == toTowerIndex ){
+                return false;
+            }
+            largeDiskTowerIndex = toTowerIndex;   
+            updateView();
+            return true;
+            
+        }
+
+        document.body.innerHTML += `
+            <h4>Oppgaver</h4>
+            Disse oppgavene er ment å løses med kun funksjoner, variabler, operatorer, if-setninger og MVC. Man trenger
+            ikke bruke løkker eller lister.
+            <ol>
+                <li><s>
+                    Studer spillet her: <a href="https://www.mathsisfun.com/games/towerofhanoi.html">mathsisfun.com/games/towerofhanoi.html</a>
+                    og sørg for at dere forstår reglene. 
+                </li>
+                <li>
+                    Sørg for at <tt>updateView()</tt> tegner opp diskene ut fra innholdet av variablene i modellen.
+                    Merk at pga <tt>display: flex</tt> og <tt>flex-direction: column-reverse</tt> må dere legge til 
+                    diskene i motsatt rekkefølge av ellers. Den siste taggen inne i hvert tårn kommer øverst
+                </li>
+                <li>
+                    Implementer aller enkleste versjon av controller-funksjonene, nemlig å flytte hver disk uten å sjekke om det er lov
+                    eller ikke. Sjekk at det virker før dere går videre. 
+                </li>
+                <li>
+                    Implementer så reglene. Du kan ikke flytte en disk til et tårn om det alt ligger en disk der som er mindre.                
+                </li></s>
+                <li>
+                    Skjul alltid knappene som flytter en disk dit den allerede er. Skjul også knappene som er ulovlige å utføre.
+                </li>
+                <li><s>
+                    Vis en melding på skjermen hvis spillet er løst, det vil si at alle diskene er på høyre tårn. Vis i det
+                    tilfellet en knapp for å starte spillet på nytt. 
+                </li></s>
+            </ol>
+        `;
+    </script>
+</body>
+
+</html>
