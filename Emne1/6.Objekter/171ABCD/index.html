@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app"></div>
+    <script>
+
+    let currentColors = {red: 100, green: 200, blue: 50}
+    let currentColors2 = {red:100, green:200, blue:50}
+
+    inverseColors(currentColors2);
+    averageColorValue(currentColors.red,currentColors2.red)
+    makeDivWithObjectColors(currentColors,currentColors2)
+    function makeDivWithObjectColors(colorObject, colorObject2){
+        document.body.innerHTML += /*HTML*/
+        `
+        <div style="height:50px; width:50px; background-color: rgb(${colorObject.red},${colorObject.green},${colorObject.blue})"></div>
+        <div style="height:50px; width:50px; background-color: rgb(${colorObject2.red},${colorObject2.green},${colorObject2.blue})"></div>
+        `
+    }
+
+    function inverseColors(colorObject){
+        currentColors2.red = 255 - colorObject.red
+        currentColors2.blue = 255 - colorObject.blue
+        currentColors2.green = 255 - colorObject.green
+        return currentColors2;
+    }
+
+    function averageColorValue(color1, color2){
+        let avg = (color1 + color2)/2
+        return avg
+    }
+
+    </script>
+    
+</body>
+</html>
