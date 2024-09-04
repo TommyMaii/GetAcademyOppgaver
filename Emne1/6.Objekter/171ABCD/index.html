@@ -13,27 +13,41 @@
     let currentColors = {red: 100, green: 200, blue: 50}
     let currentColors2 = {red:100, green:200, blue:50}
 
-    inverseColors(currentColors2);
-    averageColorValue(currentColors.red,currentColors2.red)
-    makeDivWithObjectColors(currentColors,currentColors2)
-    function makeDivWithObjectColors(colorObject, colorObject2){
+    makeGradient(currentColors);
+    //View
+    function makeDivWithObjectColors(colorObject){
         document.body.innerHTML += /*HTML*/
         `
         <div style="height:50px; width:50px; background-color: rgb(${colorObject.red},${colorObject.green},${colorObject.blue})"></div>
-        <div style="height:50px; width:50px; background-color: rgb(${colorObject2.red},${colorObject2.green},${colorObject2.blue})"></div>
         `
     }
 
     function inverseColors(colorObject){
-        currentColors2.red = 255 - colorObject.red
-        currentColors2.blue = 255 - colorObject.blue
-        currentColors2.green = 255 - colorObject.green
-        return currentColors2;
+        let red = 255 - colorObject.red
+        let blue = 255 - colorObject.blue
+        let green = 255 - colorObject.green
+        return {red:red, green:green, blue:blue};
     }
 
-    function averageColorValue(color1, color2){
-        let avg = (color1 + color2)/2
-        return avg
+    function averageColorValue(colorObject1, colorObject2){
+        let avgRed = (colorObject1.red + colorObject1.red)/2
+        let avgBlue = (colorObject1.blue + colorObject1.blue)/2
+        let avgGreen = (colorObject1.green + colorObject1.green)/2
+        return {red:avgRed, green:avgGreen, blue:avgBlue};
+    }
+
+    function makeGradient(colorObject){
+        let colors = [];
+        let inversedColor = inverseColors(colorObject);
+        //averageColorValue(colorObject, averageColorValue(colorObject, inverseColors(colorObject)));
+        // averageColorValue(averageColorValue(colorObject, inverseColors(colorObject)), inverseColors(colorObject));
+        colors.push(colorObject);
+        colors.push(averageColorValue(colorObject, averageColorValue(colorObject, inverseColors(colorObject))));
+        colors.push(averageColorValue(colorObject, inversedColor));
+        colors.push(averageColorValue(averageColorValue(averageColorValue(colorObject, inverseColors(colorObject)), inverseColors(colorObject))));
+        colors.push(inversedColor);
+        console.log(colors)
+
     }
 
     </script>

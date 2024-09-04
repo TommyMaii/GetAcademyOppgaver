@@ -10,11 +10,11 @@ function fixText(text){
     }
     else if(regexTemplateWhiteSpace.test(text)){
         newText = text.trim();
-        newText = newText.charAt(0).toUpperCase() + newText.slice(1);
+        newText = newText.charAt(0).toUpperCase() + newText.substring(1);
         return newText;
     }
     else if(regexTemplateCharacter.test(text)){
-        newText = text.charAt(0).toUpperCase() + text.slice(1)
+        newText = text.charAt(0).toUpperCase() + text.substring(1)
         return newText;
     }
     return text;

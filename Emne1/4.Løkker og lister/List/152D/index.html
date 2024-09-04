@@ -7,46 +7,46 @@
 </head>
 <body>
     
-    <div id="app"></div>
+    <div id="wrapper"></div>
     
     <script>
 
-        let userInput = `Lim inn din tekst så teller jeg ordene for deg!`;
-        let wordCount;
-        show();
-        countWords();
+            //model
+        let textareaInputString = '';
+        let cleanedTextList = [];
+        let words = [];
+        let wordCounts = [];
+        let outputString = '';
 
-        function countWords(){
-            let input = document.getElementById("inputtedText").value;
-            words = input.replace(/\d/gi, "").split(" ");
-            userInput = input;
-            for(i = 0; i < inputArray.length; i++){
-                if(inputArray[i] == "") {inputArray.splice(i,1000)}
-            }
-            wordCount = inputArray.length;
-            show();
+        //view
+
+        updateView();
+        function updateView(){
+            document.querySelector("#wrapper").innerHTML = /*HTML*/ `
+                <textarea onchange="textareaInputString = this.value"></textarea>
+                <br />
+                <button onclick="countWordsInLists()">Count Words</button>
+                <br />
+            `
         }
 
-        //Woops leste ikke helt oppgaveteksten =)
-        // function countWords(){
-        //     let input = document.getElementById("inputtedText").value;
-        //     inputArray = input.replace(/\d/gi, "").split(" ");
-        //     userInput = input;
-        //     console.log(inputArray);
-        //     for(i = 0; i < inputArray.length; i++){
-        //         if(inputArray[i] == "") {inputArray.splice(i,1000)}
-        //     }
-        //     wordCount = inputArray.length;
-        //     show();
-        // }
 
-        function show(){
-            document.getElementById("app").innerHTML = /*HTML*/
-            `
-            <textarea id="inputtedText" style="width:750px; height:300px">${userInput}</textarea>
-            <button onclick="countWords()">Count words</button>
-            <h3>Teksten din har: ${wordCount} ord!</h3>
-            `
+        //controller
+
+        function cleanTextAndSplitIntoList(){
+            let cleanedText;
+            cleanedText = textareaInputString.replace(/[^a-zA-ZæøåÆØÅ' ']/g, "");
+            words = cleanedText.split(' ');
+        }
+
+        function countWordsInLists(){
+            cleanTextAndSplitIntoList();
+            for(i = 0; i < words.length; i++){
+                let count = words[i];
+                wordCounts[count] = (wordCounts[count] + 1) || 1;
+            }
+            console.log(wordCounts)
+            updateView();
         }
 
     </script>
