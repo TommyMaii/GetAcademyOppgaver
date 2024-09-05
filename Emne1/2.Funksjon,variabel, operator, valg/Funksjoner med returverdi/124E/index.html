@@ -12,7 +12,7 @@
     <script>
 
         createGrid(3, 2, 
-        createDiv('Kol 1 rad 1')
+        createDiv('Kol 1 rad 1', '', '')
         + createDiv('Kol 2 rad 1')
         + createDiv('Kol 3 rad 1')
         + createDiv('Kol 1 rad 2')
@@ -25,7 +25,7 @@
         }
 
         function isStylesEmpty(text, foregroundColor, backgroundColor){
-            if(foregroundColor == '' || backgroundColor == '' || backgroundColor && foregroundColor == ''){
+            if(foregroundColor == '' || backgroundColor == '' || (backgroundColor && foregroundColor == '')){
                 return document.body.innerHTML = /*HTML*/
                 `
                 <div>${text}</div>

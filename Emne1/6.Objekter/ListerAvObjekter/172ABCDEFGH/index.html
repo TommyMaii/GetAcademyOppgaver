@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border: 2px gray solid;
+
+        }
+        th{
+            background-color: aquamarine;
+            border: 2px aquamarine solid;
+        }
+        td{
+            text-align: center;
+            vertical-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+    </div>
+
+    <script>
+        //Model
+        let assignments = [];
+        let assignedPersons = [];
+
+        //View
+        updateView();
+        function updateView(){
+            let html = document.getElementById("app");
+
+            html.innerHTML = createTableHTML() + createDefaultHTML();
+            tableHtml = document.getElementById("assignmentsTable");
+            let selectHtml = document.getElementById("filterAssignedPersonSelect");
+                        
+            for(i = 0; i < assignments.length; i++){
+                tableHtml.innerHTML += createHTMLRow(i)
+            }
+
+            for(y = 0; y < assignedPersons.length; y++){
+                selectHtml.innerHTML += /*HTML*/ `<option value="${assignedPersons[y]}">${assignedPersons[y]}</option>`
+            }
+        }
+
+        function createTableHTML(){
+            return `
+            <table id="assignmentsTable">
+                <tr>
+                    <th>Oppgave</th>
+                    <th>Utført Dato</th>
+                    <th>Hvem</th>
+                    <th>fullført</th>
+                    <th>Slett</th>
+                </tr>
+            </table>
+            `
+        }
+        function createDefaultHTML(){
+
+            return `
+            <br>
+            Legg til oppgave <br>
+
+            <input id="aText" type="text" oninput="name = this.value" value="Lage middag"><br>
+            Velg hvem som skal fullføre denne oppgaven
+            <br>
+            <select name="names" id="assignedPersonSelect">
+            <option value="Tommy">Tommy</option>
+            <option value="Christopher">Christopher</option>
+            <option value="Emilie">Emilie</option>
+            <option value="Thomas">Thomas</option>
+            </select>
+            <br>
+            <p></p>
+            <button onclick="addTask()">Legg til</button>
+            <p>Filtrer på navn</p>
+            <br>
+            <select name="names" id="filterAssignedPersonSelect">
+            <option value="seeEveryone">Se alle</option>
+            </select>
+            <button onclick="filterAssignedPerson()">Filter</button>
+            `
+        }
+
+        function createHTMLRow(index){
+            if(!assignments[index].editMode){    
+            return /*HTML*/ `<tr>
+                <td>
+                    ${(!assignments) ? '' : assignments[index].text}
+                </td>
+                <td>
+                    ${(!assignments) ? '' : assignments[index].doneDate}
+                </td>
+                <td>
+                    ${(!assignments) ? '' : assignments[index].assignedPerson}
+                </td>
+                <td>
+                    <input type="checkbox" ${assignments[index].isDone ? 'checked' : ''} onchange="assignCheckedToTrueAndShowDate(${index})">
+                </td>
+                <td>
+                    <button onclick="removeAssignment(${index})">Slett oppgave</button>
+                    <button onclick="editAssignmentMode(${index})">Rediger oppgave</button>
+                </td>
+                </tr>
+                `}
+                return /*HTML*/ `<tr>
+                <td>
+                    <input type="text" value="${assignments[index].text}" id="updateTextInput" oninput="changeAssignmentText(${index})">
+                </td>
+                <td>
+                    ${(!assignments) ? '' : assignments[index].doneDate}
+                </td>
+                <td>
+                    <select name="names" id="updateAssignedPersonSelect" onchange="changeAssignedPersonValue(${index})">
+                    <option value="Tommy">Tommy</option>
+                    <option value="Christopher">Christopher</option>
+                    <option value="Emilie">Emilie</option>
+                    <option value="Thomas">Thomas</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="checkbox" ${assignments[index].isDone ? 'checked' : ''} onchange="assignCheckedToTrueAndShowDate(${index})">
+                </td>
+                <td>
+                    <button onclick="removeAssignment(${index})">Slett oppgave</button>
+                    <button onclick="editAssignmentMode(${index})">Lagre</button>
+                </td>
+                </tr>
+                `
+        }
+
+        //Controller
+        function addTask(){
+            let getText = document.getElementById("aText").value;
+            let getPerson = document.getElementById("assignedPersonSelect").value;
+            assignments.push({
+                text: getText,
+                doneDate: '',
+                assignedPerson: getPerson,
+                isDone: false,
+                editMode: false,
+            })
+            filterAssignedPerson();
+            updateView();
+        }
+
+        function changeAssignedPersonValue(index){
+            let updatePerson = document.getElementById("updateAssignedPersonSelect").value;
+            assignments[index].assignedPerson = updatePerson;
+        }
+
+        function changeAssignmentText(index){
+            let updatedText = document.getElementById("updateTextInput").value;
+            assignments[index].text = updatedText;
+        }
+        
+
+        function assignCheckedToTrueAndShowDate(index){
+            assignments[index].isDone = true;
+            createDate(index);
+            updateView();
+        }
+
+        function createDate(index){
+            assignments[index].doneDate = new Date().toLocaleDateString();
+        }
+
+        function removeAssignment(index){
+            assignments.splice(index,1);
+            updateView();
+        }
+
+        function editAssignmentMode(index){
+            assignments[index].editMode ? assignments[index].editMode = false :  assignments[index].editMode = true;
+            updateView();
+        }
+
+        function updateAssignmentAndLeaveEditMode(index){
+            editAssignmentMode(index);
+            updateView();
+        }
+
+        function filterAssignedPerson(){
+            for(i = 0; i < assignments.length; i++){
+                if(assignedPersons.indexOf(assignments[i].assignedPerson) == -1){
+                    assignedPersons.push(assignments[i].assignedPerson);
+                }
+            }
+        }
+
+
+
+    </script>
+    
+</body>
+</html>

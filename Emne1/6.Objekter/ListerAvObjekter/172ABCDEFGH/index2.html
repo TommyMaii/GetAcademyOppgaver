@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app"></div>
+
+    <script>
+
+        let text = 'Hei'
+        let editMode = false;
+
+        updateView();
+        function updateView(){
+            if(editMode == false){
+                return document.getElementById("app").innerHTML = `<tr>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                    <input type="checkbox" onchange="">
+                </td>
+                <td>
+                    <button onclick="">Slett oppgave</button>
+                    <button onclick="editeMode()">Rediger oppgave</button>
+                </td>
+                </tr>
+                `}
+            return document.getElementById("app").innerHTML = /*HTML*/ 
+                `<tr>
+                <td>
+                    <input type="text">
+                </td>
+                <td>
+                </td>
+                <td>
+                    <select name="names" id="assignedPersonSelect" onchange="">
+                    <option value="Tommy">Tommy</option>
+                    <option value="Christopher">Christopher</option>
+                    <option value="Emilie">Emilie</option>
+                    <option value="Thomas">Thomas</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="checkbox">
+                </td>
+                <td>
+                    <button onclick="">Slett oppgave</button>
+                    <button onclick="">Avslutt Redigering oppgave</button>
+                </td>
+                </tr>
+                `
+        }
+
+        function editeMode(){
+            editMode = true;
+            updateView();
+        }
+
+    </script>
+
+
+</body>
+</html>
