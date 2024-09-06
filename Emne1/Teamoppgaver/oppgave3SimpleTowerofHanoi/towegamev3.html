@@ -72,10 +72,6 @@
         let smallDiskMiddleButton = true;
         let smallDiskLeftButton = true;
 
-        let smallDisk = '<div class="disk" style="width: 30px"></div>' 
-        let mediumDisk = '<div class="disk" style="width: 50px"></div>' 
-        let largeDisk = '<div class="disk" style="width: 70px"></div>' 
-
         let hasWon = false;
 
         // view 
@@ -84,6 +80,7 @@
             resetButtons();
             checkButtons();
             buttonHTML();
+            hasWonGame();
         function buttonHTML(){
             html = `
                 Flytt liten disk til 
@@ -108,17 +105,17 @@
                 <div class="game-container">
                     <div class="tower-container">
                         <div class="tower">
-                            ${checkTowerIndex(0)}
+                            ${createDiskHTML(0)}
                         </div>
                     </div>
                     <div class="tower-container">
                         <div class="tower">
-                            ${checkTowerIndex(1)}
+                            ${createDiskHTML(1)}
                         </div>
                     </div>
                     <div class="tower-container">
                         <div class="tower">
-                            ${checkTowerIndex(2)}
+                            ${createDiskHTML(2)}
                         </div>
                     </div>
                 </div>
@@ -128,27 +125,33 @@
             `;
         }
 
-        // controller
-        function checkTowerIndex(towerIndex){
+        function createDiskHTML(towerIndex){
             towerHTML = '';
+            const largeDisk = '<div class="disk" style="width: 70px"></div>' ;
+            const middleDisk = '<div class="disk" style="width: 50px"></div>' ;
+            const smallDisk = '<div class="disk" style="width: 30px"></div>' ;
             if(towerIndex == 0){
             }
             if(largeDiskTowerIndex == towerIndex){
                 towerHTML += largeDisk;
             }
             if(mediumDiskTowerIndex == towerIndex){
-                towerHTML += mediumDisk;
+                towerHTML += middleDisk;
                 
             }
             if(smallDiskTowerIndex == towerIndex){
                 towerHTML += smallDisk;
             }  
-            if(smallDiskTowerIndex == 2 && mediumDiskTowerIndex == 2 && largeDiskTowerIndex == 2){
-                hasWon = true;
-            }
             return towerHTML;
         }
 
+        function hasWonGame(){
+            if(smallDiskTowerIndex == 2 && mediumDiskTowerIndex == 2 && largeDiskTowerIndex == 2){
+                hasWon = true;
+            }
+        }
+
+        // controller
         function resetButtons(){
             largeDiskRightButton = true;
             largeDiskMiddleButton = true;
@@ -203,7 +206,11 @@
         }
 
         function resetGame(){
-            location.reload();
+            smallDiskTowerIndex = 0;
+            mediumDiskTowerIndex = 0;
+            largeDiskTowerIndex = 0;
+            hasWon = false;
+            updateView();
         }
 
 
@@ -213,6 +220,7 @@
         }
 
         function moveMediumDisk(toTowerIndex) {
+            if((smallDiskTowerIndex == mediumDiskTowerIndex)) return;
             if(smallDiskTowerIndex == toTowerIndex){ 
                 return false;
             }
@@ -222,6 +230,8 @@
         }
 
         function moveLargeDisk(toTowerIndex) {
+            if((smallDiskTowerIndex == largeDiskTowerIndex)) return;
+            if((mediumDiskTowerIndex == largeDiskTowerIndex)) return;
             if((smallDiskTowerIndex == toTowerIndex) || mediumDiskTowerIndex == toTowerIndex ){
                 return false;
             }
@@ -251,11 +261,11 @@
                 </li>
                 <li>
                     Implementer så reglene. Du kan ikke flytte en disk til et tårn om det alt ligger en disk der som er mindre.                
-                </li></s>
+                </li>
                 <li>
                     Skjul alltid knappene som flytter en disk dit den allerede er. Skjul også knappene som er ulovlige å utføre.
                 </li>
-                <li><s>
+                <li>
                     Vis en melding på skjermen hvis spillet er løst, det vil si at alle diskene er på høyre tårn. Vis i det
                     tilfellet en knapp for å starte spillet på nytt. 
                 </li></s>

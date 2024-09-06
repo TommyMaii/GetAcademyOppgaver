@@ -15,7 +15,7 @@
         let shownText = '';
         show();
         
-        function makeWord(){
+        function splitThenCountWords(){
             let words = {}
             splitText = text.split(" ");
             for(i = 0; i < splitText.length; i++){
@@ -35,7 +35,9 @@
             document.getElementById("app").innerHTML = /*HTML*/
             `
             <textarea id="inputtedText" style="width:300px; height:300px" oninput="text = this.value">${text}</textarea>
-            <button onclick="makeWord()">Count words</button>
+            <br>
+            <button onclick="splitThenCountWords()">Tell ord</button>
+            <br>
             <input>Velg hvilket ord du har lyst til å telle opp<br>
             <h1>${shownText['hei']}</h1>
             `;
