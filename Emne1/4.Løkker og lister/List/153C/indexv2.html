@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="wrapper"></div>
+
+
+    <script>
+    
+  //model
+let textareaInputString = '';
+let cleanedTextList = [];
+let words = [];
+let wordCounts = [''];
+let outputString = '';
+
+//view
+
+updateView();
+function updateView(){
+    document.querySelector("#wrapper").innerHTML = /*HTML*/ `
+        <textarea onchange="textareaInputString = this.value"></textarea>
+        <br />
+        <button onclick="countWordsInLists()">Count Words</button>
+        <br />
+    `
+    console.log(words)
+    console.log(wordCounts)
+}
+
+
+//controller
+
+function cleanTextAndSplitIntoList(){
+    let cleanedText;
+    cleanedText = textareaInputString.replace(/[^a-zA-ZæøåÆØÅ' ']/g, "");
+    words = cleanedText.split(' ');
+}
+
+function countWordsInLists(){
+    cleanTextAndSplitIntoList();
+    for(i = 0; i < words.length; i++){
+        count = words[i];
+        wordCounts[count] = (wordCounts[count] + 1) || 1;
+    }
+    updateView();
+}
+
+    </script>
+</body>
+</html>
