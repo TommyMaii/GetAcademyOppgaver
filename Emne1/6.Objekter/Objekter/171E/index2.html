@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app"></div>
+    <button onclick="updateView()">updateView</button>
+    
+    <script>
+
+
+
+        function updateView(){
+            let bool = false;
+
+            if(bool == false){
+                bool = true;
+                tempString = `<div>${bool}</div>`
+            }
+            else if(bool == true){
+                bool = false;
+                tempString = `<div>${bool}</div>`
+            }
+
+            document.getElementById("app").innerHTML = tempString;
+
+        }
+
+
+
+    </script>
+
+
+</body>
+</html>
